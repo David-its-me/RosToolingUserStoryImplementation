@@ -1,0 +1,31 @@
+moveit2_scripts:
+  fromGitRepo: "https://github.com/David-its-me/SimplePickAndPlace.git"
+  artifacts:
+    pick_and_place:
+      node: simple_pick_and_place_applictation
+      actionclients:
+        execute_trajectory: 
+          type: "moveit_msgs/action/ExecuteTrajectory"
+        move_action: 
+          type: "moveit_msgs/action/MoveGroup"
+      serviceclients:
+        compute_cartesian_path: 
+          type: "moveit_msgs/srv/GetCartesianPath"
+        get_planner_params: 
+          type: "moveit_msgs/srv/GetPlannerParams"
+        query_planner_interface:
+          type: "moveit_msgs/srv/QueryPlannerInterfaces"
+        set_planner_params: 
+          type: "moveit_msgs/srv/SetPlannerParams"
+      subscribers:
+          joint_states: 
+            type: "sensor_msgs/msg/JointState"
+          trajectory_execution_event:
+            type: "std_msgs/msg/String"
+      publishers:
+        attached_collision_object: 
+          type: "moveit_msgs/msg/AttachedCollisionObject"
+        trajectory_execution_event:
+          type: "std_msgs/msg/String"
+    cartesian_path:
+      node: move_group_interface_tutorial

@@ -1,0 +1,33 @@
+pick_and_place:
+  nodes:
+    robot_state_publisher_node:
+      from: "robot_state_publisher.robot_state_publisher"
+    controller_manager:
+      from: "controller_manager.controller_manager" # "joint_state_broadcaster", "io_and_status_controller",  "speed_scaling_state_broadcaster", "force_torque_sensor_broadcaster"
+    initial_joint_controller:
+      from: "controller_manager.controller_manager"
+    initial_joint_controller_spawner_stopped:
+      from: "controller_manager.controller_manager"
+    ur_ros2_control_node:
+      from: "ur_robot_driver.ur_ros2_control_node"
+    dashboard_client:
+      from: "ur_robot_driver.dashboard_client" # with condition
+    urscript_interface:
+      from: "ur_robot_driver.urscript_interface"
+    controller_stopper:
+      from: "ur_robot_driver.controller_stopper_node"
+    moveit_simple_controller_manager: ### Addition from David
+      from: "moveit_simple_controller_manager.moveit_simple_controller_manager"
+  parameters:
+    ur_type: # used in several nodes
+      type: String
+      default: 'ur5e' ### Addition from David
+    robot_ip: # used in several nodes
+      type: String
+      default: '192.168.56.2' ### Addition from David
+    use_fake_hardware:
+      type: Boolean
+    initial_joint_controller:
+      type: String
+    activate_joint_controller:
+      type: Boolean

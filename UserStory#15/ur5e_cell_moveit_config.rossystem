@@ -1,0 +1,2 @@
+ur5e_cell_moveit_config:
+  fromFile: "ur5e_cell_moveit_config/launch/robot.launch.py"
