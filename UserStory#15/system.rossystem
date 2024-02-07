@@ -1,0 +1,6 @@
+system:
+  subSystems:
+    ur5e_cell_moveit_config
+  nodes:
+    YourScript:
+      from: "moveit2_scripts.simple_pick_and_place_applictation"
