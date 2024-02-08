@@ -1,8 +1,8 @@
-gripper_command_skills: # This must be exactly the package name
+io_control_gripper_skill:# This must be the exact package name
   fromGitRepo: "https://gitlab.cc-asp.fraunhofer.de/ipa326/demonstrator/bt_based_application_framework"
   artifacts:
-    gripper_command_action_server: # change to executor name
-      node: ur_io_control_gripper_skill_server
+    ur_io_control_gripper_action_server: # change to exector name
+      node: ur_io_control_gripper_action_server
       subscribers:
         "bond":
           type: "bond/msg/Status"

@@ -1,6 +1,7 @@
-aruco_marker_publisher:
+aruco_ros:# This must be the exact package name
+  fromGitRepo: "https://github.com/pal-robotics/aruco_ros"
   artifacts:
-    aruco_marker_publisher: # change to exector name
+    marker_publisher: # change to exector name
       node: marker_publisher
       subscribers:
         "camera/color/image_raw":

@@ -1,7 +1,8 @@
-realsense_camera:
+realsense2_camera:
+  fromGitRepo: "https://github.com/ipa-rwu/realsense_camera_calibrated.git"
   artifacts:
-    realsense_camera: # change to exector name
-      node: realsense_camera_calibrated
+    realsense2_camera_node:
+      node: camera
       subscribers:
         "parameter_events":
           type: "rcl_interfaces/msg/ParameterEvent"

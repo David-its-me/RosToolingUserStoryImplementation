@@ -24,6 +24,6 @@ man2_bt_skill_clients: # This must be exactly the package name
           type: "rcl_interfaces/srv/SetParameters"
         "~/set_parameters_atomically":
           type: "rcl_interfaces/srv/SetParametersAtomically"
-      serviceclients:
+      actionservers:
         "update_orientation_in_pose":
           type: "man2_msgs/action/UpdateOrientationInPose"
