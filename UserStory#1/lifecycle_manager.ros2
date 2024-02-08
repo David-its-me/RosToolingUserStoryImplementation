@@ -70,8 +70,7 @@ lifecycle_manager:
           type: Double
           value: 1.0
         "node_names":
-          type:
-            Array: String
+          type:Array [String]
           value: "['bt_operator', 'detect_aruco_marker_action_server', 'moveit_skill_server', 'ur_io_control_gripper_skill_server']"
         "qos_overrides./parameter_events.publisher.depth":
           type: Integer
