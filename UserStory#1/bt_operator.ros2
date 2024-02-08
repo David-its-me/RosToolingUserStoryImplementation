@@ -56,16 +56,13 @@ bt_operator:
           type: String
           value: "MoveHome"
         "customized_plugin_lib_names.man2_bt_skill_clients":
-          type:
-            Array: String
+          type:Array [String]
           value: "['compute_path_to_state_client', 'compute_path_to_pose_client', 'compute_path_to_point_client', 'execute_trajectory_client', 'set_path_constraints', 'get_current_ik_frame_pose_client', 'update_pose', 'split_pose', 'create_pose', 'update_orientation_in_pose', 'detect_aruco_marker_client', 'print_value']"
         "customized_plugin_lib_names.ur_robot_skill_clients":
-          type:
-            Array: String
+          type:Array [String]
           value: "['io_control_gripper', 'get_ur_robot_state', 'get_ur_safety_state', 'get_ur_program_state', 'check_safety_mode', 'check_robot_mode', 'is_robot_running', 'is_safety_normal', 'is_program_running']"
         "default_plugin_lib_names":
-          type:
-            Array: String
+          type:Array [String]
           value: "['util_plugin_print_value']"
         "print_bt_status":
           type: Boolean
