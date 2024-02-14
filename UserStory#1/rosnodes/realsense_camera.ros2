@@ -1,0 +1,442 @@
+realsense2_camera:
+  fromGitRepo: "https://github.com/ipa-rwu/realsense_camera_calibrated.git"
+  artifacts:
+    realsense2_camera_node:
+      node: camera
+      publishers:
+        "color/camera_info":
+          type: "sensor_msgs/msg/CameraInfo"
+        "color/image_raw":
+          type: "sensor_msgs/msg/Image"
+        "color/metadata":
+          type: "realsense2_camera_msgs/msg/Metadata"
+        "depth/camera_info":
+          type: "sensor_msgs/msg/CameraInfo"
+        "depth/image_rect_raw":
+          type: "sensor_msgs/msg/Image"
+        "depth/metadata":
+          type: "realsense2_camera_msgs/msg/Metadata"
+        "extrinsics/depth_to_color":
+          type: "realsense2_camera_msgs/msg/Extrinsics"
+        "imu":
+          type: "sensor_msgs/msg/Imu"
+        "tf_static":
+          type: "tf2_msgs/msg/TFMessage"
+      serviceservers:
+        "device_info":
+          type: "realsense2_camera_msgs/srv/DeviceInfo"
+      parameters:
+        "align_depth.enable":
+          type: Boolean
+          value: False
+        "align_depth.frames_queue_size":
+          type: Integer
+          value: 16
+        "angular_velocity_cov":
+          type: Double
+          value: 0.01
+        "frame_id":
+          type: String
+        "child_frame_id":
+          type: String
+        "base_frame_id":
+          type: String
+          value: link
+        "camera_name": #prefix of frame name
+          type: String
+        "clip_distance":
+          type: Double
+          value: -2.0
+        "color_info_qos":
+          type: String
+          value: DEFAULT
+        "color_qos":
+          type: String
+          value: SYSTEM_DEFAULT
+        "colorizer.color_scheme":
+          type: Integer
+          value: 0
+        "colorizer.enable":
+          type: Boolean
+          value: False
+        "colorizer.frames_queue_size":
+          type: Integer
+          value: 16
+        "colorizer.histogram_equalization_enabled":
+          type: Boolean
+          value: True
+        "colorizer.max_distance":
+          type: Double
+          value: 6.0
+        "colorizer.min_distance":
+          type: Double
+          value: 0.0
+        "colorizer.stream_filter":
+          type: Integer
+          value: 1
+        "colorizer.stream_format_filter":
+          type: Integer
+          value: 1
+        "colorizer.stream_index_filter":
+          type: Integer
+          value: -1
+        "colorizer.visual_preset":
+          type: Integer
+          value: 0
+        "decimation_filter.enable":
+          type: Boolean
+          value: False
+        "decimation_filter.filter_magnitude":
+          type: Integer
+          value: 2
+        "decimation_filter.frames_queue_size":
+          type: Integer
+          value: 16
+        "decimation_filter.stream_filter":
+          type: Integer
+          value: 1
+        "decimation_filter.stream_format_filter":
+          type: Integer
+          value: 1
+        "decimation_filter.stream_index_filter":
+          type: Integer
+          value: -1
+        "depth_info_qos":
+          type: String
+          value: DEFAULT
+        "depth_module.auto_exposure_roi.bottom":
+          type: Integer
+          value: 479
+        "depth_module.auto_exposure_roi.left":
+          type: Integer
+          value: 0
+        "depth_module.auto_exposure_roi.right":
+          type: Integer
+          value: 847
+        "depth_module.auto_exposure_roi.top":
+          type: Integer
+          value: 0
+        "depth_module.emitter_always_on":
+          type: Boolean
+          value: False
+        "depth_module.emitter_enabled":
+          type: Integer
+          value: 1
+        "depth_module.emitter_on_off":
+          type: Boolean
+          value: False
+        "depth_module.enable_auto_exposure":
+          type: Boolean
+          value: True
+        "depth_module.error_polling_enabled":
+          type: Boolean
+          value: True
+        "depth_module.exposure":
+          type: Integer
+          value: 8500
+        "depth_module.frames_queue_size":
+          type: Integer
+          value: 16
+        "depth_module.gain":
+          type: Integer
+          value: 16
+        "depth_module.global_time_enabled":
+          type: Boolean
+          value: True
+        "depth_module.hdr_enabled":
+          type: Boolean
+          value: False
+        "depth_module.inter_cam_sync_mode":
+          type: Integer
+          value: 0
+        "depth_module.laser_power":
+          type: Double
+          value: 150.0
+        "depth_module.output_trigger_enabled":
+          type: Boolean
+          value: False
+        "depth_module.profile":
+          type: String
+          value: "848x480x30"
+        "depth_module.sequence_id":
+          type: Integer
+          value: 0
+        "depth_module.sequence_name":
+          type: Integer
+          value: 0
+        "depth_module.sequence_size":
+          type: Integer
+          value: 2
+        "depth_module.visual_preset":
+          type: Integer
+          value: 0
+        "depth_qos":
+          type: String
+          value: SYSTEM_DEFAULT
+        "device_type":
+          type: String
+          value: ""
+        "diagnostics_period":
+          type: Double
+          value: 0.0
+        "disparity_filter.enable":
+          type: Boolean
+          value: False
+        "disparity_to_depth.enable":
+          type: Boolean
+          value: False
+        "enable_color":
+          type: Boolean
+          value: True
+        "enable_depth":
+          type: Boolean
+          value: True
+        "enable_infra1":
+          type: Boolean
+          value: False
+        "enable_infra2":
+          type: Boolean
+          value: False
+        "enable_sync":
+          type: Boolean
+          value: False
+        "filter_by_sequence_id.enable":
+          type: Boolean
+          value: False
+        "filter_by_sequence_id.frames_queue_size":
+          type: Integer
+          value: 16
+        "filter_by_sequence_id.sequence_id":
+          type: Integer
+          value: 1
+        "hdr_merge.enable":
+          type: Boolean
+          value: False
+        "hdr_merge.frames_queue_size":
+          type: Integer
+          value: 16
+        "hold_back_imu_for_frames":
+          type: Boolean
+          value: False
+        "hole_filling_filter.enable":
+          type: Boolean
+          value: False
+        "hole_filling_filter.frames_queue_size":
+          type: Integer
+          value: 16
+        "hole_filling_filter.holes_fill":
+          type: Integer
+          value: 1
+        "hole_filling_filter.stream_filter":
+          type: Integer
+          value: 1
+        "hole_filling_filter.stream_format_filter":
+          type: Integer
+          value: 1
+        "hole_filling_filter.stream_index_filter":
+          type: Integer
+          value: -1
+        "infra1_info_qos":
+          type: String
+          value: DEFAULT
+        "infra1_qos":
+          type: String
+          value: SYSTEM_DEFAULT
+        "infra2_info_qos":
+          type: String
+          value: DEFAULT
+        "infra2_qos":
+          type: String
+          value: SYSTEM_DEFAULT
+        "initial_reset":
+          type: Boolean
+          value: False
+        "json_file_path":
+          type: String
+          value:
+        "linear_accel_cov":
+          type: Double
+          value: 0.01
+        "pointcloud.allow_no_texture_points":
+          type: Boolean
+          value: False
+        "pointcloud.enable":
+          type: Boolean
+          value: False
+        "pointcloud.filter_magnitude":
+          type: Integer
+          value: 2
+        "pointcloud.frames_queue_size":
+          type: Integer
+          value: 16
+        "pointcloud.ordered_pc":
+          type: Boolean
+          value: False
+        "pointcloud.pointcloud_qos":
+          type: String
+          value: DEFAULT
+        "pointcloud.stream_filter":
+          type: Integer
+          value: 2
+        "pointcloud.stream_format_filter":
+          type: Integer
+          value: 0
+        "pointcloud.stream_index_filter":
+          type: Integer
+          value: 0
+        "publish_odom_tf":
+          type: Boolean
+          value: True
+        "publish_tf":
+          type: Boolean
+          value: False
+        "qos_overrides./parameter_events.publisher.depth":
+          type: Integer
+          value: 1000
+        "qos_overrides./parameter_events.publisher.durability":
+          type: String
+          value: "volatile"
+        "qos_overrides./parameter_events.publisher.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./parameter_events.publisher.reliability":
+          type: String
+          value: "volatile"
+        "reconnect_timeout":
+          type: Double
+          value: 6.0
+        "rgb_camera.auto_exposure_priority":
+          type: Boolean
+          value: False
+        "rgb_camera.auto_exposure_roi.bottom":
+          type: Integer
+          value: 479
+        "rgb_camera.auto_exposure_roi.left":
+          type: Integer
+          value: 0
+        "rgb_camera.auto_exposure_roi.right":
+          type: Integer
+          value: 639
+        "rgb_camera.auto_exposure_roi.top":
+          type: Integer
+          value: 0
+        "rgb_camera.backlight_compensation":
+          type: Boolean
+          value: False
+        "rgb_camera.brightness":
+          type: Integer
+          value: 0
+        "rgb_camera.contrast":
+          type: Integer
+          value: 50
+        "rgb_camera.enable_auto_exposure":
+          type: Boolean
+          value: True
+        "rgb_camera.enable_auto_white_balance":
+          type: Boolean
+          value: True
+        "rgb_camera.exposure":
+          type: Integer
+          value: 166
+        "rgb_camera.frames_queue_size":
+          type: Integer
+          value: 16
+        "rgb_camera.gain":
+          type: Integer
+          value: 64
+        "rgb_camera.gamma":
+          type: Integer
+          value: 300
+        "rgb_camera.global_time_enabled":
+          type: Boolean
+          value: True
+        "rgb_camera.hue":
+          type: Integer
+          value: 0
+        "rgb_camera.power_line_frequency":
+          type: Integer
+          value: 3
+        "rgb_camera.profile":
+          type: String
+          value: "640x480x30"
+        "rgb_camera.saturation":
+          type: Integer
+          value: 64
+        "rgb_camera.sharpness":
+          type: Integer
+          value: 50
+        "rgb_camera.white_balance":
+          type: Double
+          value: 4600.0
+        "rosbag_filename":
+          type: String
+          value: ""
+        "serial_no":
+          type: String
+          value: ""
+        "spatial_filter.enable":
+          type: Boolean
+          value: False
+        "spatial_filter.filter_magnitude":
+          type: Integer
+          value: 2
+        "spatial_filter.filter_smooth_alpha":
+          type: Double
+          value: 0.5
+        "spatial_filter.filter_smooth_delta":
+          type: Integer
+          value: 20
+        "spatial_filter.frames_queue_size":
+          type: Integer
+          value: 16
+        "spatial_filter.holes_fill":
+          type: Integer
+          value: 0
+        "spatial_filter.stream_filter":
+          type: Integer
+          value: 1
+        "spatial_filter.stream_format_filter":
+          type: Integer
+          value: 1
+        "spatial_filter.stream_index_filter":
+          type: Integer
+          value: -1
+        "temporal_filter.enable":
+          type: Boolean
+          value: False
+        "temporal_filter.filter_smooth_alpha":
+          type: Double
+          value: 0.4
+        "temporal_filter.filter_smooth_delta":
+          type: Integer
+          value: 20
+        "temporal_filter.frames_queue_size":
+          type: Integer
+          value: 16
+        "temporal_filter.holes_fill":
+          type: Integer
+          value: 3
+        "temporal_filter.stream_filter":
+          type: Integer
+          value: 1
+        "temporal_filter.stream_format_filter":
+          type: Integer
+          value: 1
+        "temporal_filter.stream_index_filter":
+          type: Integer
+          value: -1
+        "tf_publish_rate":
+          type: Double
+          value: 0.0
+        "unite_imu_method":
+          type: Integer
+          value: 0
+        "usb_port_id":
+          type: String
+          value: ""
+        "use_sim_time":
+          type: Boolean
+          value: False
+        "wait_for_device_timeout":
+          type: Double
+          value: -1.0
