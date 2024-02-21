@@ -1,0 +1,79 @@
+static_transform_publisher_IVKSiOuOb5VvkaNK:
+  artifacts:
+    static_transform_publisher_IVKSiOuOb5VvkaNK: # change to exector name
+      node: static_transform_publisher_IVKSiOuOb5VvkaNK
+      subscribers:
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+      publishers:
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+        "tf_static":
+          type: "tf2_msgs/msg/TFMessage"
+      serviceservers:
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+      parameters:
+        "child_frame_id":
+          type: String
+          value: "tool0"
+        "frame_id":
+          type: String
+          value: "camera_link"
+        "qos_overrides./parameter_events.publisher.depth":
+          type: Integer
+          value: 1000
+        "qos_overrides./parameter_events.publisher.durability":
+          type: String
+          value: "volatile"
+        "qos_overrides./parameter_events.publisher.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./parameter_events.publisher.reliability":
+          type: String
+          value: "reliable"
+        "qos_overrides./tf_static.publisher.depth":
+          type: Integer
+          value: 1
+        "qos_overrides./tf_static.publisher.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./tf_static.publisher.reliability":
+          type: String
+          value: "reliable"
+        "rotation.w":
+          type: Double
+          value: -0.463867
+        "rotation.x":
+          type: Double
+          value: -0.529877
+        "rotation.y":
+          type: Double
+          value: 0.53423
+        "rotation.z":
+          type: Double
+          value: -0.467606
+        "translation.x":
+          type: Double
+          value: -0.00640796
+        "translation.y":
+          type: Double
+          value: -0.0551158
+        "translation.z":
+          type: Double
+          value: 0.0079675292
+        "use_sim_time":
+          type: Boolean
+          value: False

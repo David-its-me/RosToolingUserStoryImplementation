@@ -1,0 +1,230 @@
+rviz:
+  artifacts:
+    rviz: # change to exector name
+      node: rviz
+      subscribers:
+        "display_planned_path":
+          type: "moveit_msgs/msg/DisplayTrajectory"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "recognized_object_array":
+          type: "object_recognition_msgs/msg/RecognizedObjectArray"
+        "~_moveit_motion_planning_display/robot_interaction_interactive_marker_topic/feedback":
+          type: "visualization_msgs/msg/InteractiveMarkerFeedback"
+      publishers:
+        "attached_collision_object":
+          type: "moveit_msgs/msg/AttachedCollisionObject"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "planning_scene":
+          type: "moveit_msgs/msg/PlanningScene"
+        "planning_scene_world":
+          type: "moveit_msgs/msg/PlanningSceneWorld"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+        "~_moveit_motion_planning_display/robot_interaction_interactive_marker_topic/update":
+          type: "visualization_msgs/msg/InteractiveMarkerUpdate"
+        "trajectory_execution_event":
+          type: "std_msgs/msg/String"
+      serviceclients:
+        "clear_octomap":
+          type: "std_srvs/srv/Empty"
+        "compute_cartesian_path":
+          type: "moveit_msgs/srv/GetCartesianPath"
+        "get_planner_params":
+          type: "moveit_msgs/srv/GetPlannerParams"
+        "query_planner_interface":
+          type: "moveit_msgs/srv/QueryPlannerInterfaces"
+        "set_planner_params":
+          type: "moveit_msgs/srv/SetPlannerParams"
+      serviceservers:
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+        "~_moveit_motion_planning_display/robot_interaction_interactive_marker_topic/get_interactive_markers":
+          type: "visualization_msgs/srv/GetInteractiveMarkers"
+      actionclients:
+        "execute_trajectory":
+          type: "moveit_msgs/action/ExecuteTrajectory"
+        "move_action":
+          type: "moveit_msgs/action/MoveGroup"
+      parameters:
+        "arm.kinematics_solver":
+          type: String
+          value: "None"
+        "default_planning_pipeline":
+          type: String
+          value: "ompl"
+        "hand.kinematics_solver":
+          type: String
+          value: "None"
+        "qos_overrides./parameter_events.publisher.depth":
+          type: Integer
+          value: 1000
+        "qos_overrides./parameter_events.publisher.durability":
+          type: String
+          value: "volatile"
+        "qos_overrides./parameter_events.publisher.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./parameter_events.publisher.reliability":
+          type: String
+          value: "reliable"
+        "robot_description":
+          type: String
+          value: "None"
+        "robot_description_continuous":
+          type: Boolean
+          value: None
+        "robot_description_kinematics.arm.kinematics_solver":
+          type: String
+          value: "kdl_kinematics_plugin/KDLKinematicsPlugin"
+        "robot_description_kinematics.arm.kinematics_solver_ik_links":
+          type:
+            Array: String
+          value: "None"
+        "robot_description_kinematics.arm.kinematics_solver_search_resolution":
+          type: Double
+          value: 0.005
+        "robot_description_kinematics.arm.kinematics_solver_timeout":
+          type: Double
+          value: 0.005
+        "robot_description_kinematics.hand.kinematics_solver":
+          type: String
+          value: "None"
+        "robot_description_kinematics.hand.kinematics_solver_ik_links":
+          type:
+            Array: String
+          value: "None"
+        "robot_description_kinematics.hand.kinematics_solver_search_resolution":
+          type: Double
+          value: None
+        "robot_description_kinematics.hand.kinematics_solver_timeout":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.elbow_joint.has_acceleration_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.elbow_joint.has_jerk_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.elbow_joint.has_velocity_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.elbow_joint.max_position":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.elbow_joint.min_position":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.shoulder_lift_joint.has_acceleration_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.shoulder_lift_joint.has_jerk_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.shoulder_lift_joint.has_velocity_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.shoulder_lift_joint.max_position":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.shoulder_lift_joint.min_position":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.shoulder_pan_joint.has_acceleration_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.shoulder_pan_joint.has_jerk_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.shoulder_pan_joint.has_velocity_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.shoulder_pan_joint.max_position":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.shoulder_pan_joint.min_position":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.wrist_1_joint.has_acceleration_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.wrist_1_joint.has_jerk_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.wrist_1_joint.has_velocity_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.wrist_1_joint.max_position":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.wrist_1_joint.min_position":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.wrist_2_joint.has_acceleration_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.wrist_2_joint.has_jerk_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.wrist_2_joint.has_velocity_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.wrist_2_joint.max_position":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.wrist_2_joint.min_position":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.wrist_3_joint.has_acceleration_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.wrist_3_joint.has_jerk_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.wrist_3_joint.has_velocity_limits":
+          type: Boolean
+          value: None
+        "robot_description_planning.joint_limits.wrist_3_joint.max_position":
+          type: Double
+          value: None
+        "robot_description_planning.joint_limits.wrist_3_joint.min_position":
+          type: Double
+          value: None
+        "robot_description_semantic":
+          type: String
+          value: "None"
+        "robot_description_semantic_continuous":
+          type: Boolean
+          value: None
+        "robot_description_semantic_timeout":
+          type: Double
+          value: None
+        "robot_description_timeout":
+          type: Double
+          value: None
+        "tf_buffer_cache_time_ms":
+          type: Integer
+          value: 10000
+        "use_sim_time":
+          type: Boolean
+          value: False
+        "warehouse_host":
+          type: String
+          value: "127.0.0.1"
+        "warehouse_plugin":
+          type: String
+          value: "warehouse_ros_mongo::MongoDatabaseConnection"
+        "warehouse_port":
+          type: Integer
+          value: 33829

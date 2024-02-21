@@ -1,0 +1,97 @@
+dashboard_client:
+  artifacts:
+    dashboard_client: # change to exector name
+      node: dashboard_client
+      subscribers:
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+      publishers:
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+      serviceservers:
+        "~/add_to_log":
+          type: "ur_dashboard_msgs/srv/AddToLog"
+        "~/brake_release":
+          type: "std_srvs/srv/Trigger"
+        "~/clear_operational_mode":
+          type: "std_srvs/srv/Trigger"
+        "~/close_popup":
+          type: "std_srvs/srv/Trigger"
+        "~/close_safety_popup":
+          type: "std_srvs/srv/Trigger"
+        "~/connect":
+          type: "std_srvs/srv/Trigger"
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_loaded_program":
+          type: "ur_dashboard_msgs/srv/GetLoadedProgram"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/get_robot_mode":
+          type: "ur_dashboard_msgs/srv/GetRobotMode"
+        "~/get_safety_mode":
+          type: "ur_dashboard_msgs/srv/GetSafetyMode"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/load_installation":
+          type: "ur_dashboard_msgs/srv/Load"
+        "~/load_program":
+          type: "ur_dashboard_msgs/srv/Load"
+        "~/pause":
+          type: "std_srvs/srv/Trigger"
+        "~/play":
+          type: "std_srvs/srv/Trigger"
+        "~/popup":
+          type: "ur_dashboard_msgs/srv/Popup"
+        "~/power_off":
+          type: "std_srvs/srv/Trigger"
+        "~/power_on":
+          type: "std_srvs/srv/Trigger"
+        "~/program_running":
+          type: "ur_dashboard_msgs/srv/IsProgramRunning"
+        "~/program_saved":
+          type: "ur_dashboard_msgs/srv/IsProgramSaved"
+        "~/program_state":
+          type: "ur_dashboard_msgs/srv/GetProgramState"
+        "~/quit":
+          type: "std_srvs/srv/Trigger"
+        "~/raw_request":
+          type: "ur_dashboard_msgs/srv/RawRequest"
+        "~/restart_safety":
+          type: "std_srvs/srv/Trigger"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+        "~/shutdown":
+          type: "std_srvs/srv/Trigger"
+        "~/stop":
+          type: "std_srvs/srv/Trigger"
+        "~/unlock_protective_stop":
+          type: "std_srvs/srv/Trigger"
+      parameters:
+        "qos_overrides./parameter_events.publisher.depth":
+          type: Integer
+          value: 1000
+        "qos_overrides./parameter_events.publisher.durability":
+          type: String
+          value: "volatile"
+        "qos_overrides./parameter_events.publisher.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./parameter_events.publisher.reliability":
+          type: String
+          value: "reliable"
+        "receive_timeout":
+          type: Double
+          value: 1.0
+        "robot_ip":
+          type: String
+          value: "192.168.56.2"
+        "use_sim_time":
+          type: Boolean
+          value: False

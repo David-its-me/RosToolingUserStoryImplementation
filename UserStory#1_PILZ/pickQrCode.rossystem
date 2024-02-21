@@ -1,7 +1,7 @@
-qr_detection_and_decision_of_picking_robot:
-  ############################ Moveit and UR DRiver ###################
+qr_detection_and_decision_of_picking_robot_PILZ:
+  ############################ Moveit and PRBT DRiver ###################
   subSystems:
-    ur5e_cell_moveit_config
+    prbt_cell_moveit_config ### Changed
   nodes:
     ########################## Realsense ################################
     marker_publisher:
@@ -15,7 +15,7 @@ qr_detection_and_decision_of_picking_robot:
         - reference_frame: "marker_publisher::reference_frame"
           value: tool0 #### important to know where the camera is mounted
         - marker_size_arg: "marker_publisher::marker_size"
-          value: 0.02
+          value: 0.01 ### Changed
         - raw_image_topic: "marker_publisher::raw_image_topic"
           value: "camera/color/image_raw"
         - camera_info_topic: "marker_publisher::camera_info_topic"
@@ -162,9 +162,12 @@ qr_detection_and_decision_of_picking_robot:
           value: "/moveit_cpp/monitored_planning_scene"
         - planning_scene_monitor_options_monitored_planning_scene_topic: "moveit_skill_server_node::planning_scene_monitor_options/wait_for_initial_state_timeout"
           value: 10.0
-                                                                      
-    ur_io_control_gripper_skill_server: # This is a managed node
-      from: "io_control_gripper_skill.ur_io_control_gripper_action_server"
+    
+    
+    ### TODO configure the Gripper
+    ################################                                                                  
+    #ur_io_control_gripper_skill_server: # This is a managed node
+    #  from: "io_control_gripper_skill.ur_io_control_gripper_action_server"
      
     lifecycle_manager: # responsible to start all the managed nodes above
       from: "nav2_lifecycle_manager.lifecycle_manager"
@@ -177,7 +180,7 @@ qr_detection_and_decision_of_picking_robot:
         - autostart: "lifecycle_manager::autostart" # Whether to transition nodes to active state on startup.
           value: true
         - node_names: "lifecycle_manager::node_names" # Ordered list of node names to bringup through lifecycle transition.
-          value: ['bt_operator', 'detect_aruco_marker_action_server', 'moveit_skill_server', 'ur_io_control_gripper_skill_server']
+          value: ['bt_operator', 'detect_aruco_marker_action_server', 'moveit_skill_server' /*, 'ur_io_control_gripper_skill_server'*/]
         - bond_timeout: "lifecycle_manager::bond_timeout" # Timeout to transition down all lifecycle nodes of this manager if a server is non-responsive, in seconds. Set to 0 to deactivate. Recommended to be always larger than 0.3s for all-local node discovery. Note: if a server cleanly exits the manager will immediately be notified.
           value: 4.0
     

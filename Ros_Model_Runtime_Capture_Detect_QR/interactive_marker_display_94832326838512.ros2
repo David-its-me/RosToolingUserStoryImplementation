@@ -1,0 +1,48 @@
+interactive_marker_display_94832326838512:
+  artifacts:
+    interactive_marker_display_94832326838512: # change to exector name
+      node: interactive_marker_display_94832326838512
+      subscribers:
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rviz_moveit_motion_planning_display/robot_interaction_interactive_marker_topic/update":
+          type: "visualization_msgs/msg/InteractiveMarkerUpdate"
+      publishers:
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+        "rviz_moveit_motion_planning_display/robot_interaction_interactive_marker_topic/feedback":
+          type: "visualization_msgs/msg/InteractiveMarkerFeedback"
+      serviceclients:
+        "rviz_moveit_motion_planning_display/robot_interaction_interactive_marker_topic/get_interactive_markers":
+          type: "visualization_msgs/srv/GetInteractiveMarkers"
+      serviceservers:
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+      parameters:
+        "qos_overrides./parameter_events.publisher.depth":
+          type: Integer
+          value: 1000
+        "qos_overrides./parameter_events.publisher.durability":
+          type: String
+          value: "volatile"
+        "qos_overrides./parameter_events.publisher.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./parameter_events.publisher.reliability":
+          type: String
+          value: "reliable"
+        "use_sim_time":
+          type: Boolean
+          value: False

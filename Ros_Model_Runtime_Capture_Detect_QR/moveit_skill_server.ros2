@@ -1,7 +1,6 @@
-moveit_skills: # This must be the exact package name
-  fromGitRepo: "https://gitlab.cc-asp.fraunhofer.de/ipa326/demonstrator/bt_based_application_framework"
+moveit_skill_server:
   artifacts:
-    moveit_skill_server_node: # change to executor name
+    moveit_skill_server: # change to exector name
       node: moveit_skill_server
       subscribers:
         "bond":
@@ -100,40 +99,3 @@ moveit_skills: # This must be the exact package name
         "use_sim_time":
           type: Boolean
           value: False
-        "robot_description":
-          type: String
-          value: "Please put the robot description in here as an XML String"
-        "robot_description_semantic":
-          type: String
-          value: "Please put the robot description  semantic in here as an XML String"
-        "robot_description_kinematics/arm/kinematics_solver":
-    	  type: String
-        "robot_description_kinematics/arm/kinematics_solver_search_resolution":
-          type: Double
-        "robot_description_kinematics/arm/kinematics_solver_timeout":
-          type: Double          	
-        "planning_pipelines/pipeline_names":
-          type: Array[String]
-        "pilz_industrial_motion_planner/planning_plugin":
-          type: String
-        "pilz_industrial_motion_planner/request_adapters":
-          type: String
-        "pilz_industrial_motion_planner/default_planner_config":
-          type: String
-        "pilz_industrial_motion_planner/capabilities":
-          type: String
-        "planning_scene_monitor_options/name":
-          type: String
-        "planning_scene_monitor_options/robot_description":
-          type: String    
-        "planning_scene_monitor_options/joint_state_topic":
-          type: String    
-        "planning_scene_monitor_options/attached_collision_object_topic":
-          type: String
-        "planning_scene_monitor_options/publish_planning_scene_topic":
-          type: String    
-        "planning_scene_monitor_options/monitored_planning_scene_topic":
-          type: String
-        "planning_scene_monitor_options/wait_for_initial_state_timeout":
-          type: Double                                                                                             
-            

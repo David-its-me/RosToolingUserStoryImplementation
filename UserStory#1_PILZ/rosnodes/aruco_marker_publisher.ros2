@@ -1,0 +1,69 @@
+aruco_ros:# This must be the exact package name
+  fromGitRepo: "https://github.com/pal-robotics/aruco_ros"
+  artifacts:
+    marker_publisher: # change to exector name
+      node: marker_publisher
+      subscribers:
+        "camera/color/image_raw":
+          type: "sensor_msgs/msg/Image"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+      publishers:
+        "debug":
+          type: "sensor_msgs/msg/Image"
+        "markers":
+          type: "aruco_msgs/msg/MarkerArray"
+        "markers_list":
+          type: "std_msgs/msg/UInt32MultiArray"
+        "result":
+          type: "sensor_msgs/msg/Image"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+      serviceservers:
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+      parameters:
+        "camera_frame":
+          type: String
+          value: "camera_color_optical_frame"
+        "image_is_rectified":
+          type: Boolean
+          value: True
+        "marker_size":
+          type: Double
+          value: 0.05
+        "qos_overrides./parameter_events.publisher.depth":
+          type: Integer
+          value: 1000
+        "qos_overrides./parameter_events.publisher.durability":
+          type: String
+          value: "volatile"
+        "qos_overrides./parameter_events.publisher.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./parameter_events.publisher.reliability":
+          type: String
+          value: "reliable"
+        "camera_info_topic":
+          type: String
+        "reference_frame":
+          type: String
+          value: "world"
+        "use_camera_info":
+          type: Boolean
+          value: True
+        "use_sim_time":
+          type: Boolean
+          value: False

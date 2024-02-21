@@ -1,0 +1,11 @@
+man2_bt_operator:
+  fromGitRepo: "https://gitlab.cc-asp.fraunhofer.de/ipa326/demonstrator/bt_based_application_framework"
+  artifacts:
+    call_start_app: # change to executor name
+      node: call_start_app
+      actionclients:
+        "start_application":
+          type: "man2_msgs/action/RunApplication"
+      #parameters:
+      #  "test":
+      #      type: Boolean

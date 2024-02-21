@@ -1,0 +1,35 @@
+moveit_skill_server_moveit_cpp_node:
+  artifacts:
+    moveit_skill_server_moveit_cpp_node: # change to exector name
+      node: moveit_skill_server_moveit_cpp_node
+      subscribers:
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "trajectory_execution_event":
+          type: "std_msgs/msg/String"
+      publishers:
+        "display_contacts":
+          type: "visualization_msgs/msg/MarkerArray"
+        "display_planned_path":
+          type: "moveit_msgs/msg/DisplayTrajectory"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+      serviceservers:
+        "load_map":
+          type: "moveit_msgs/srv/LoadMap"
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+        "save_map":
+          type: "moveit_msgs/srv/SaveMap"

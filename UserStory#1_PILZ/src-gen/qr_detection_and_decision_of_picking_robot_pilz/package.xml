@@ -3,9 +3,9 @@
    href="http://download.ros.org/schema/package_format3.xsd"
    schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
- <name>qr_detection_and_decision_of_picking_robot</name>
+ <name>qr_detection_and_decision_of_picking_robot_pilz</name>
  <version>0.0.1</version>
- <description>This package provides launch file for operating qr_detection_and_decision_of_picking_robot</description>
+ <description>This package provides launch file for operating qr_detection_and_decision_of_picking_robot_PILZ</description>
   <maintainer email="jane.doe@example.com">Jane Doe</maintainer>
   <author email="jane.doe@example.com">Jane Doe</author>
   <license>Apache 2.0</license>
@@ -20,9 +20,8 @@
   <exec_depend>man2_bt_operator</exec_depend>
   <exec_depend>detect_aruco_marker_skill</exec_depend>
   <exec_depend>moveit_skills</exec_depend>
-  <exec_depend>io_control_gripper_skill</exec_depend>
   <exec_depend>nav2_lifecycle_manager</exec_depend>
-  <exec_depend>ur5e_cell_moveit_config</exec_depend>
+  <exec_depend>prbt_cell_bringup</exec_depend>
 
   <!--test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>

@@ -1,0 +1,7 @@
+moveit_system:
+  nodes:
+    moveit:
+      from: "moveit_simple_controller_manager.moveit_simple_controller_manager"
+      interfaces:
+        - 
+        

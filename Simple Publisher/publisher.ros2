@@ -1,5 +1,5 @@
 moveit2_scripts:
-  fromGitRepo: "https://github.com/David-its-me/SimplePickAndPlace"
+  fromGitRepo: "https://github.com/David-its-me/SimplePickAndPlace.git"
   artifacts:
     pick_and_place:
       node: simple_pick_and_place_applictation

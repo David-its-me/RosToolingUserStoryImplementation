@@ -1,0 +1,58 @@
+controller_stopper:
+  artifacts:
+    controller_stopper: # change to exector name
+      node: controller_stopper
+      subscribers:
+        "io_and_status_controller/robot_program_running":
+          type: "std_msgs/msg/Bool"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+      publishers:
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+      serviceclients:
+        "controller_manager/list_controllers":
+          type: "controller_manager_msgs/srv/ListControllers"
+        "controller_manager/switch_controller":
+          type: "controller_manager_msgs/srv/SwitchController"
+      serviceservers:
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+      parameters:
+        "consistent_controllers":
+          type:
+            Array: String
+          value: "['io_and_status_controller', 'force_torque_sensor_broadcaster', 'joint_state_broadcaster', 'speed_scaling_state_broadcaster']"
+        "headless_mode":
+          type: Boolean
+          value: False
+        "joint_controller_active":
+          type: Boolean
+          value: True
+        "qos_overrides./parameter_events.publisher.depth":
+          type: Integer
+          value: 1000
+        "qos_overrides./parameter_events.publisher.durability":
+          type: String
+          value: "volatile"
+        "qos_overrides./parameter_events.publisher.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./parameter_events.publisher.reliability":
+          type: String
+          value: "reliable"
+        "use_sim_time":
+          type: Boolean
+          value: False

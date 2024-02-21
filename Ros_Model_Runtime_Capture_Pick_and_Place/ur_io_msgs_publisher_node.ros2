@@ -1,0 +1,58 @@
+ur_io_msgs_publisher_node:
+  artifacts:
+    ur_io_msgs_publisher_node: # change to exector name
+      node: ur_io_msgs_publisher_node
+      subscribers:
+        "clock":
+          type: "rosgraph_msgs/msg/Clock"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+      publishers:
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+      serviceclients:
+        "io_and_status_controller/set_io":
+          type: "ur_msgs/srv/SetIO"
+      serviceservers:
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+      parameters:
+        "qos_overrides./clock.subscription.depth":
+          type: Integer
+          value: 1
+        "qos_overrides./clock.subscription.durability":
+          type: String
+          value: "volatile"
+        "qos_overrides./clock.subscription.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./clock.subscription.reliability":
+          type: String
+          value: "best_effort"
+        "qos_overrides./parameter_events.publisher.depth":
+          type: Integer
+          value: 1000
+        "qos_overrides./parameter_events.publisher.durability":
+          type: String
+          value: "volatile"
+        "qos_overrides./parameter_events.publisher.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./parameter_events.publisher.reliability":
+          type: String
+          value: "reliable"
+        "use_sim_time":
+          type: Boolean
+          value: True

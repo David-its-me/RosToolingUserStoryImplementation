@@ -1,0 +1,90 @@
+nav2_lifecycle_manager:
+  fromGitRepo: "https://github.com/ros-planning/navigation2/tree/main"
+  artifacts:
+    lifecycle_manager: # change to exector name
+      node: lifecycle_manager
+      subscribers:
+        "bond":
+          type: "bond/msg/Status"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+      publishers:
+        "bond":
+          type: "bond/msg/Status"
+        "diagnostics":
+          type: "diagnostic_msgs/msg/DiagnosticArray"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+      serviceclients:
+        "bt_operator/change_state":
+          type: "lifecycle_msgs/srv/ChangeState"
+        "bt_operator/get_state":
+          type: "lifecycle_msgs/srv/GetState"
+        "detect_aruco_marker_action_server/change_state":
+          type: "lifecycle_msgs/srv/ChangeState"
+        "detect_aruco_marker_action_server/get_state":
+          type: "lifecycle_msgs/srv/GetState"
+        "moveit_skill_server/change_state":
+          type: "lifecycle_msgs/srv/ChangeState"
+        "moveit_skill_server/get_state":
+          type: "lifecycle_msgs/srv/GetState"
+        "ur_io_control_gripper_skill_server/change_state":
+          type: "lifecycle_msgs/srv/ChangeState"
+        "ur_io_control_gripper_skill_server/get_state":
+          type: "lifecycle_msgs/srv/GetState"
+      serviceservers:
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/is_active":
+          type: "std_srvs/srv/Trigger"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/manage_nodes":
+          type: "nav2_msgs/srv/ManageLifecycleNodes"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+      parameters:
+        "bond_disable_heartbeat_timeout":
+          type: Boolean
+          value: False
+        "attempt_respawn_reconnection":
+          type: Boolean
+          value: True
+        "autostart":
+          type: Boolean
+          value: True
+        "bond_respawn_max_duration":
+          type: Double
+          value: 10.0
+        "bond_timeout":
+          type: Double
+          value: 4.0
+        "diagnostic_updater.period":
+          type: Double
+          value: 1.0
+        "node_names":
+          type:Array [String]
+          value: "['bt_operator', 'detect_aruco_marker_action_server', 'moveit_skill_server', 'ur_io_control_gripper_skill_server']"
+        "qos_overrides./parameter_events.publisher.depth":
+          type: Integer
+          value: 1000
+        "qos_overrides./parameter_events.publisher.durability":
+          type: String
+          value: "volatile"
+        "qos_overrides./parameter_events.publisher.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./parameter_events.publisher.reliability":
+          type: String
+          value: "reliable"
+        "use_sim_time":
+          type: Boolean
+          value: False

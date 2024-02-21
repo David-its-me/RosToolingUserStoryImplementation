@@ -1,0 +1,70 @@
+moveit_skill_server_moveit_cpp_node_private_94750214393056:
+  artifacts:
+    moveit_skill_server_moveit_cpp_node_private_94750214393056: # change to exector name
+      node: moveit_skill_server_moveit_cpp_node_private_94750214393056
+      subscribers:
+        "collision_object":
+          type: "moveit_msgs/msg/CollisionObject"
+        "joint_states":
+          type: "sensor_msgs/msg/JointState"
+        "moveit_cpp/planning_scene_monitor":
+          type: "moveit_msgs/msg/AttachedCollisionObject"
+        "moveit_cpp/publish_planning_scene":
+          type: "moveit_msgs/msg/PlanningScene"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "planning_scene_world":
+          type: "moveit_msgs/msg/PlanningSceneWorld"
+      publishers:
+        "monitored_planning_scene":
+          type: "moveit_msgs/msg/PlanningScene"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+      serviceservers:
+        "compute_path_moveitcpp_skill/get_planning_scene":
+          type: "moveit_msgs/srv/GetPlanningScene"
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+      parameters:
+        "publish_geometry_updates":
+          type: Boolean
+          value: True
+        "publish_planning_scene":
+          type: Boolean
+          value: True
+        "publish_planning_scene_hz":
+          type: Double
+          value: 4.0
+        "publish_state_updates":
+          type: Boolean
+          value: True
+        "publish_transforms_updates":
+          type: Boolean
+          value: True
+        "qos_overrides./parameter_events.publisher.depth":
+          type: Integer
+          value: 1000
+        "qos_overrides./parameter_events.publisher.durability":
+          type: String
+          value: "volatile"
+        "qos_overrides./parameter_events.publisher.history":
+          type: String
+          value: "keep_last"
+        "qos_overrides./parameter_events.publisher.reliability":
+          type: String
+          value: "reliable"
+        "use_sim_time":
+          type: Boolean
+          value: False

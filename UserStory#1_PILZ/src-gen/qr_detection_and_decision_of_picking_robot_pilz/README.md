@@ -1,4 +1,4 @@
-# qr_detection_and_decision_of_picking_robot
+# qr_detection_and_decision_of_picking_robot_PILZ
 
 This package has be created automatically using the [RosTooling](https://github.com/ipa320/RosTooling).
 
@@ -10,7 +10,6 @@ It holds the launch file to run the following nodes:
 - bt_operator
 - detect_acuco_marker_action_server
 - moveit_skill_server
-- ur_io_control_gripper_skill_server
 - lifecycle_manager
 
 The listed nodes offer the following connections:
@@ -38,7 +37,7 @@ Then the workspace must be compiled using the common ROS 2 build command:
 ```
 mkdir -p ros2_ws/src
 cd ros2_ws/
-cp PATHtoTHISPackage/qr_detection_and_decision_of_picking_robot src/. 
+cp PATHtoTHISPackage/qr_detection_and_decision_of_picking_robot_PILZ src/. 
 rosdep install --from-path src/ -i -y
 colcon build
 source install/setup.bash
@@ -52,7 +51,7 @@ source install/setup.bash
 To execute the launch file, the following command can be called:
 
 ```
-ros2 launch qr_detection_and_decision_of_picking_robot qr_detection_and_decision_of_picking_robot.launch.py
+ros2 launch qr_detection_and_decision_of_picking_robot_PILZ qr_detection_and_decision_of_picking_robot_PILZ.launch.py
 ```
 
 The generated launch files requires the xterm package, it can be installed by:

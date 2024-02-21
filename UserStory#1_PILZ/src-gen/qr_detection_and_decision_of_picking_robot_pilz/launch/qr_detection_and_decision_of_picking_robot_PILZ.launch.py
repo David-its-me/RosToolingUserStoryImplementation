@@ -17,7 +17,7 @@ def generate_launch_description():
     )
     ld.add_action(reference_frame_arg)
     marker_size_arg_arg = DeclareLaunchArgument(
-        "marker_size_arg", default_value=TextSubstitution(text="0.02")
+        "marker_size_arg", default_value=TextSubstitution(text="0.01")
     )
     ld.add_action(marker_size_arg_arg)
     raw_image_topic_arg = DeclareLaunchArgument(
@@ -310,7 +310,7 @@ def generate_launch_description():
     )
     ld.add_action(autostart_arg)
     node_names_arg = DeclareLaunchArgument(
-        "node_names", default_value=TextSubstitution(text="[bt_operator, detect_aruco_marker_action_server, moveit_skill_server, ur_io_control_gripper_skill_server]")
+        "node_names", default_value=TextSubstitution(text="[bt_operator, detect_aruco_marker_action_server, moveit_skill_server]")
     )
     ld.add_action(node_names_arg)
     bond_timeout_arg = DeclareLaunchArgument(
@@ -439,13 +439,6 @@ def generate_launch_description():
         "planning_scene_monitor_options/monitored_planning_scene_topic": LaunchConfiguration("planning_scene_monitor_options_monitored_planning_scene_topic"),
         "planning_scene_monitor_options/wait_for_initial_state_timeout": LaunchConfiguration("planning_scene_monitor_options_monitored_planning_scene_topic"),}]
     )
-    ur_io_control_gripper_skill_server = Node(
-        package="io_control_gripper_skill",
-        executable="main_ur_io_control_gripper_action_server",
-        prefix = 'xterm -e',
-        output='screen',
-        name="ur_io_control_gripper_skill_server"
-    )
     lifecycle_manager = Node(
         package="nav2_lifecycle_manager",
         executable="lifecycle_manager",
@@ -463,8 +456,8 @@ def generate_launch_description():
         "node_names": LaunchConfiguration("node_names"),
         "bond_timeout": LaunchConfiguration("bond_timeout"),}]
     )
-    include_ur5e_cell_moveit_config= IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory('ur5e_cell_moveit_config') + '/launch/robot.launch.py'])
+    include_prbt_cell_moveit_config= IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([get_package_share_directory('prbt_cell_bringup') + '/launch/bringup.launch.py'])
     )
 
     ld.add_action(marker_publisher)
@@ -473,9 +466,8 @@ def generate_launch_description():
     ld.add_action(bt_operator)
     ld.add_action(detect_acuco_marker_action_server)
     ld.add_action(moveit_skill_server)
-    ld.add_action(ur_io_control_gripper_skill_server)
     ld.add_action(lifecycle_manager)
-    ld.add_action(include_ur5e_cell_moveit_config)
+    ld.add_action(include_prbt_cell_moveit_config)
     ld.add_action(camera_frame_arg)
     ld.add_action(reference_frame_arg)
     ld.add_action(marker_size_arg_arg)
