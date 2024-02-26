@@ -1,0 +1,139 @@
+moveit_skills: # This must be the exact package name
+  fromGitRepo: "https://gitlab.cc-asp.fraunhofer.de/ipa326/demonstrator/bt_based_application_framework"
+  artifacts:
+    moveit_skill_server_node: # change to executor name
+      node: moveit_skill_server
+      subscribers:
+        "bond":
+          type: "bond/msg/Status"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+      publishers:
+        "bond":
+          type: "bond/msg/Status"
+        "~/transition_event":
+          type: "lifecycle_msgs/msg/TransitionEvent"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+      serviceservers:
+        "~/change_state":
+          type: "lifecycle_msgs/srv/ChangeState"
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_available_states":
+          type: "lifecycle_msgs/srv/GetAvailableStates"
+        "~/get_available_transitions":
+          type: "lifecycle_msgs/srv/GetAvailableTransitions"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/get_state":
+          type: "lifecycle_msgs/srv/GetState"
+        "~/get_transition_graph":
+          type: "lifecycle_msgs/srv/GetAvailableTransitions"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+      actionclients:
+        "joint_trajectory_controller/follow_joint_trajectory":
+          type: "control_msgs/action/FollowJointTrajectory"
+      actionservers:
+        "compute_path_to_point":
+          type: "man2_msgs/action/ComputePathToPoint"
+        "compute_path_to_pose":
+          type: "man2_msgs/action/ComputePathToPose"
+        "compute_path_to_state":
+          type: "man2_msgs/action/ComputePathToState"
+        "execute_trajectory":
+          type: "man2_msgs/action/ExecuteTrajectory"
+        "get_current_ik_frame_pose":
+          type: "man2_msgs/action/GetCurrentIKFramePose"
+      parameters:
+        "bond_disable_heartbeat_timeout":
+          type: Boolean
+          value: None
+        "get_planning_scene_service_name":
+          type: String
+          value: "compute_path_moveitcpp_skill/get_planning_scene"
+        "goal_joint_tolerance":
+          type: Double
+          value: None
+        "goal_orientation_tolerance":
+          type: Double
+          value: None
+        "goal_position_tolerance":
+          type: Double
+          value: 0.0001
+        "jump_threshold":
+          type: Double
+          value: 0.0
+        "max_acceleration_scaling_factor":
+          type: Double
+          value: 0.3
+        "max_velocity_scaling_factor":
+          type: Double
+          value: 0.1
+        "min_fraction":
+          type: Double
+          value: 0.5
+        "planner_id":
+          type: String
+          value: "RRTstarkConfigDefault"
+        "planning_attempts":
+          type: Integer
+          value: 10
+        "planning_pipeline":
+          type: String
+          value: "ompl"
+        "planning_time":
+          type: Double
+          value: 1.0
+        "step_size":
+          type: Double
+          value: 0.005
+        "use_sim_time":
+          type: Boolean
+          value: False
+        "robot_description":
+          type: String
+          value: "Please put the robot description in here as an XML String"
+        "robot_description_semantic":
+          type: String
+          value: "Please put the robot description  semantic in here as an XML String"
+        "robot_description_kinematics/arm/kinematics_solver":
+    	  type: String
+        "robot_description_kinematics/arm/kinematics_solver_search_resolution":
+          type: Double
+        "robot_description_kinematics/arm/kinematics_solver_timeout":
+          type: Double          	
+        "planning_pipelines/pipeline_names":
+          type: Array[String]
+        "pilz_industrial_motion_planner/planning_plugin":
+          type: String
+        "pilz_industrial_motion_planner/request_adapters":
+          type: String
+        "pilz_industrial_motion_planner/default_planner_config":
+          type: String
+        "pilz_industrial_motion_planner/capabilities":
+          type: String
+        "planning_scene_monitor_options/name":
+          type: String
+        "planning_scene_monitor_options/robot_description":
+          type: String    
+        "planning_scene_monitor_options/joint_state_topic":
+          type: String    
+        "planning_scene_monitor_options/attached_collision_object_topic":
+          type: String
+        "planning_scene_monitor_options/publish_planning_scene_topic":
+          type: String    
+        "planning_scene_monitor_options/monitored_planning_scene_topic":
+          type: String
+        "planning_scene_monitor_options/wait_for_initial_state_timeout":
+          type: Double                                                                                             
+            

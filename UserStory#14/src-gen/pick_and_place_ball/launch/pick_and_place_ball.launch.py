@@ -8,82 +8,6 @@ from launch.substitutions import LaunchConfiguration, PythonExpression, PathJoin
 def generate_launch_description():
     ld = LaunchDescription()
     
-    camera_frame_arg = DeclareLaunchArgument(
-        "camera_frame", default_value=TextSubstitution(text="camera_color_optical_frame")
-    )
-    ld.add_action(camera_frame_arg)
-    reference_frame_arg = DeclareLaunchArgument(
-        "reference_frame", default_value=TextSubstitution(text="tool0")
-    )
-    ld.add_action(reference_frame_arg)
-    marker_size_arg_arg = DeclareLaunchArgument(
-        "marker_size_arg", default_value=TextSubstitution(text="0.05")
-    )
-    ld.add_action(marker_size_arg_arg)
-    raw_image_topic_arg = DeclareLaunchArgument(
-        "raw_image_topic", default_value=TextSubstitution(text="camera/color/image_raw")
-    )
-    ld.add_action(raw_image_topic_arg)
-    camera_info_topic_arg = DeclareLaunchArgument(
-        "camera_info_topic", default_value=TextSubstitution(text="camera/color/camera_info")
-    )
-    ld.add_action(camera_info_topic_arg)
-    translation_x_arg = DeclareLaunchArgument(
-        "translation_x", default_value=TextSubstitution(text="-0.00640796")
-    )
-    ld.add_action(translation_x_arg)
-    translation_y_arg = DeclareLaunchArgument(
-        "translation_y", default_value=TextSubstitution(text="-0.0551158")
-    )
-    ld.add_action(translation_y_arg)
-    translation_z_arg = DeclareLaunchArgument(
-        "translation_z", default_value=TextSubstitution(text="0.00796752")
-    )
-    ld.add_action(translation_z_arg)
-    rotation_x_arg = DeclareLaunchArgument(
-        "rotation_x", default_value=TextSubstitution(text="-0.529877")
-    )
-    ld.add_action(rotation_x_arg)
-    rotation_y_arg = DeclareLaunchArgument(
-        "rotation_y", default_value=TextSubstitution(text="0.53423")
-    )
-    ld.add_action(rotation_y_arg)
-    rotation_z_arg = DeclareLaunchArgument(
-        "rotation_z", default_value=TextSubstitution(text="-0.467606")
-    )
-    ld.add_action(rotation_z_arg)
-    rotation_w_arg = DeclareLaunchArgument(
-        "rotation_w", default_value=TextSubstitution(text="-0.463867")
-    )
-    ld.add_action(rotation_w_arg)
-    child_frame_id_arg = DeclareLaunchArgument(
-        "child_frame_id", default_value=TextSubstitution(text="camera_link")
-    )
-    ld.add_action(child_frame_id_arg)
-    frame_id_arg = DeclareLaunchArgument(
-        "frame_id", default_value=TextSubstitution(text="tool0")
-    )
-    ld.add_action(frame_id_arg)
-    camera_name_arg = DeclareLaunchArgument(
-        "camera_name", default_value=TextSubstitution(text="camera")
-    )
-    ld.add_action(camera_name_arg)
-    device_type_arg = DeclareLaunchArgument(
-        "device_type", default_value=TextSubstitution(text="d435")
-    )
-    ld.add_action(device_type_arg)
-    publish_tf_arg = DeclareLaunchArgument(
-        "publish_tf", default_value=TextSubstitution(text="false")
-    )
-    ld.add_action(publish_tf_arg)
-    frame_id_arg = DeclareLaunchArgument(
-        "frame_id", default_value=TextSubstitution(text="tool0")
-    )
-    ld.add_action(frame_id_arg)
-    child_frame_link_arg = DeclareLaunchArgument(
-        "child_frame_link", default_value=TextSubstitution(text="camera_link")
-    )
-    ld.add_action(child_frame_link_arg)
     current_bt_xml_filename_arg = DeclareLaunchArgument(
         "current_bt_xml_filename", default_value=TextSubstitution(text="Masterarbeit_Cloud/ma-lieb-robotics-integration/04_Umsetzung/Implementation/Behaviour Tree/SimpleMovement.xml -p run_loop:=false")
     )
@@ -104,30 +28,6 @@ def generate_launch_description():
         "default_plugin_lib_names", default_value=TextSubstitution(text="[util_plugin_print_value]")
     )
     ld.add_action(default_plugin_lib_names_arg)
-    bond_disable_heartbeat_timeout_arg = DeclareLaunchArgument(
-        "bond_disable_heartbeat_timeout", default_value=TextSubstitution(text="true")
-    )
-    ld.add_action(bond_disable_heartbeat_timeout_arg)
-    required_pose_num_arg = DeclareLaunchArgument(
-        "required_pose_num", default_value=TextSubstitution(text="2")
-    )
-    ld.add_action(required_pose_num_arg)
-    sub_marker_topic_arg = DeclareLaunchArgument(
-        "sub_marker_topic", default_value=TextSubstitution(text="/marker")
-    )
-    ld.add_action(sub_marker_topic_arg)
-    sub_rate_arg = DeclareLaunchArgument(
-        "sub_rate", default_value=TextSubstitution(text="10")
-    )
-    ld.add_action(sub_rate_arg)
-    timeout_arg = DeclareLaunchArgument(
-        "timeout", default_value=TextSubstitution(text="5000")
-    )
-    ld.add_action(timeout_arg)
-    use_sim_time_arg = DeclareLaunchArgument(
-        "use_sim_time", default_value=TextSubstitution(text="false")
-    )
-    ld.add_action(use_sim_time_arg)
     use_sim_time_arg = DeclareLaunchArgument(
         "use_sim_time", default_value=TextSubstitution(text="false")
     )
@@ -225,7 +125,7 @@ def generate_launch_description():
     )
     ld.add_action(robot_description_arg)
     robot_description_semantic_arg = DeclareLaunchArgument(
-        "robot_description_semantic", default_value=TextSubstitution(text=""" '<?xml version="1.0" ?><!-- =================================================================================== --><!-- |    This document was autogenerated by xacro from /home/admin326/workspaces/ros2_ws/install/ur5e_cell_moveit_config/share/ur5e_cell_moveit_config/config/ur5e_workcell.srdf | --><!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | --><!-- =================================================================================== --><!--This does not replace URDF, and is not an extension of URDF.
+        "robot_description_semantic", default_value=TextSubstitution(text="""<?xml version="1.0" ?><!-- =================================================================================== --><!-- |    This document was autogenerated by xacro from /home/admin326/workspaces/ros2_ws/install/ur5e_cell_moveit_config/share/ur5e_cell_moveit_config/config/ur5e_workcell.srdf | --><!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | --><!-- =================================================================================== --><!--This does not replace URDF, and is not an extension of URDF.
             This is a format for representing semantic information about the robot structure.
             A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
         --><robot name="ur5e_workcell"><!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc--><!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included--><!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included--><!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group--><!--SUBGROUPS: Groups can also be formed by referencing to already defined group names--><group name="arm"><joint name="shoulder_pan_joint"/><joint name="shoulder_lift_joint"/><joint name="elbow_joint"/><joint name="wrist_1_joint"/><joint name="wrist_2_joint"/><joint name="wrist_3_joint"/><chain base_link="base_link" tip_link="tool_tip"/></group><group name="hand"><joint name="schunk_egp50_tip_joint"/><joint name="schunk_egp50_pincer_2_joint"/><joint name="schunk_egp50_pincer_1_joint"/><joint name="schunk_egp50_body_joint"/><chain base_link="schunk_egp50_base_link" tip_link="tool_tip"/></group><group_state group="arm" name="home"><joint name="elbow_joint" value="-1.5794"/><joint name="shoulder_lift_joint" value="-1.74"/><joint name="shoulder_pan_joint" value="-1.5708"/><joint name="wrist_1_joint" value="0.1736"/><joint name="wrist_2_joint" value="1.5621"/><joint name="wrist_3_joint" value="0"/></group_state><group_state group="arm" name="detect"><joint name="elbow_joint" value="-1.7193"/><joint name="shoulder_lift_joint" value="-1.5446"/><joint name="shoulder_pan_joint" value="-1.4240"/><joint name="wrist_1_joint" value="-1.44775"/><joint name="wrist_2_joint" value="1.5708"/><joint name="wrist_3_joint" value="0.15865"/></group_state><!--END EFFECTOR: Purpose: Represent information about an end effector.--><end_effector group="hand" name="hand" parent_group="arm" parent_link="tool0"/><!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. --><disable_collisions link1="base_link_inertia" link2="robotcell_base_link" reason="Adjacent"/><disable_collisions link1="base_link_inertia" link2="shield_front_link" reason="Never"/><disable_collisions link1="base_link_inertia" link2="shield_left_link" reason="Never"/><disable_collisions link1="base_link_inertia" link2="shield_rear_link" reason="Never"/><disable_collisions link1="base_link_inertia" link2="shield_right_link" reason="Never"/><disable_collisions link1="base_link_inertia" link2="shoulder_link" reason="Adjacent"/><!-- <disable_collisions link1="camera_link" link2="shield_left_link" reason="Never"/>
@@ -234,7 +134,7 @@ def generate_launch_description():
             <disable_collisions link1="camera_link" link2="schunk_egp50_pincer_1_link" reason="Never"/>
             <disable_collisions link1="camera_link" link2="schunk_egp50_pincer_2_link" reason="Never"/>
             <disable_collisions link1="camera_link" link2="wrist_2_link" reason="Never"/>
-            <disable_collisions link1="camera_link" link2="wrist_3_link" reason="Adjacent"/> --><disable_collisions link1="forearm_link" link2="shield_front_link" reason="Default"/><disable_collisions link1="forearm_link" link2="shield_left_link" reason="Never"/><disable_collisions link1="forearm_link" link2="upper_arm_link" reason="Adjacent"/><disable_collisions link1="forearm_link" link2="wrist_1_link" reason="Adjacent"/><disable_collisions link1="forearm_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="robotcell_base_link" link2="shield_front_link" reason="Adjacent"/><disable_collisions link1="robotcell_base_link" link2="shield_left_link" reason="Adjacent"/><disable_collisions link1="robotcell_base_link" link2="shield_rear_link" reason="Adjacent"/><disable_collisions link1="robotcell_base_link" link2="shield_right_link" reason="Adjacent"/><disable_collisions link1="robotcell_base_link" link2="shoulder_link" reason="Never"/><disable_collisions link1="shield_front_link" link2="shield_left_link" reason="Default"/><disable_collisions link1="shield_front_link" link2="shield_rear_link" reason="Never"/><disable_collisions link1="shield_front_link" link2="shield_right_link" reason="Default"/><disable_collisions link1="shield_front_link" link2="shoulder_link" reason="Never"/><disable_collisions link1="shield_front_link" link2="upper_arm_link" reason="Default"/><disable_collisions link1="shield_left_link" link2="shield_rear_link" reason="Default"/><disable_collisions link1="shield_left_link" link2="shield_right_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="shoulder_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="schunk_egp50_base_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="schunk_egp50_body_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="schunk_egp50_pincer_1_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="schunk_egp50_pincer_2_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="upper_arm_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="wrist_1_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="wrist_3_link" reason="Never"/><disable_collisions link1="shield_rear_link" link2="shield_right_link" reason="Default"/><disable_collisions link1="shield_rear_link" link2="shoulder_link" reason="Never"/><disable_collisions link1="shield_right_link" link2="shoulder_link" reason="Never"/><disable_collisions link1="shoulder_link" link2="upper_arm_link" reason="Adjacent"/><disable_collisions link1="schunk_egp50_base_link" link2="schunk_egp50_body_link" reason="Adjacent"/><disable_collisions link1="schunk_egp50_base_link" link2="schunk_egp50_pincer_1_link" reason="Never"/><disable_collisions link1="schunk_egp50_base_link" link2="schunk_egp50_pincer_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_base_link" link2="wrist_1_link" reason="Never"/><disable_collisions link1="schunk_egp50_base_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_base_link" link2="wrist_3_link" reason="Adjacent"/><disable_collisions link1="schunk_egp50_body_link" link2="schunk_egp50_pincer_1_link" reason="Adjacent"/><disable_collisions link1="schunk_egp50_body_link" link2="schunk_egp50_pincer_2_link" reason="Adjacent"/><disable_collisions link1="schunk_egp50_body_link" link2="wrist_1_link" reason="Never"/><disable_collisions link1="schunk_egp50_body_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_body_link" link2="wrist_3_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_1_link" link2="schunk_egp50_pincer_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_1_link" link2="wrist_1_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_1_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_1_link" link2="wrist_3_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_2_link" link2="wrist_1_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_2_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_2_link" link2="wrist_3_link" reason="Never"/><disable_collisions link1="wrist_1_link" link2="wrist_2_link" reason="Adjacent"/><disable_collisions link1="wrist_1_link" link2="wrist_3_link" reason="Never"/><disable_collisions link1="wrist_2_link" link2="wrist_3_link" reason="Adjacent"/></robot>' """)
+            <disable_collisions link1="camera_link" link2="wrist_3_link" reason="Adjacent"/> --><disable_collisions link1="forearm_link" link2="shield_front_link" reason="Default"/><disable_collisions link1="forearm_link" link2="shield_left_link" reason="Never"/><disable_collisions link1="forearm_link" link2="upper_arm_link" reason="Adjacent"/><disable_collisions link1="forearm_link" link2="wrist_1_link" reason="Adjacent"/><disable_collisions link1="forearm_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="robotcell_base_link" link2="shield_front_link" reason="Adjacent"/><disable_collisions link1="robotcell_base_link" link2="shield_left_link" reason="Adjacent"/><disable_collisions link1="robotcell_base_link" link2="shield_rear_link" reason="Adjacent"/><disable_collisions link1="robotcell_base_link" link2="shield_right_link" reason="Adjacent"/><disable_collisions link1="robotcell_base_link" link2="shoulder_link" reason="Never"/><disable_collisions link1="shield_front_link" link2="shield_left_link" reason="Default"/><disable_collisions link1="shield_front_link" link2="shield_rear_link" reason="Never"/><disable_collisions link1="shield_front_link" link2="shield_right_link" reason="Default"/><disable_collisions link1="shield_front_link" link2="shoulder_link" reason="Never"/><disable_collisions link1="shield_front_link" link2="upper_arm_link" reason="Default"/><disable_collisions link1="shield_left_link" link2="shield_rear_link" reason="Default"/><disable_collisions link1="shield_left_link" link2="shield_right_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="shoulder_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="schunk_egp50_base_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="schunk_egp50_body_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="schunk_egp50_pincer_1_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="schunk_egp50_pincer_2_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="upper_arm_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="wrist_1_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="shield_left_link" link2="wrist_3_link" reason="Never"/><disable_collisions link1="shield_rear_link" link2="shield_right_link" reason="Default"/><disable_collisions link1="shield_rear_link" link2="shoulder_link" reason="Never"/><disable_collisions link1="shield_right_link" link2="shoulder_link" reason="Never"/><disable_collisions link1="shoulder_link" link2="upper_arm_link" reason="Adjacent"/><disable_collisions link1="schunk_egp50_base_link" link2="schunk_egp50_body_link" reason="Adjacent"/><disable_collisions link1="schunk_egp50_base_link" link2="schunk_egp50_pincer_1_link" reason="Never"/><disable_collisions link1="schunk_egp50_base_link" link2="schunk_egp50_pincer_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_base_link" link2="wrist_1_link" reason="Never"/><disable_collisions link1="schunk_egp50_base_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_base_link" link2="wrist_3_link" reason="Adjacent"/><disable_collisions link1="schunk_egp50_body_link" link2="schunk_egp50_pincer_1_link" reason="Adjacent"/><disable_collisions link1="schunk_egp50_body_link" link2="schunk_egp50_pincer_2_link" reason="Adjacent"/><disable_collisions link1="schunk_egp50_body_link" link2="wrist_1_link" reason="Never"/><disable_collisions link1="schunk_egp50_body_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_body_link" link2="wrist_3_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_1_link" link2="schunk_egp50_pincer_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_1_link" link2="wrist_1_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_1_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_1_link" link2="wrist_3_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_2_link" link2="wrist_1_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_2_link" link2="wrist_2_link" reason="Never"/><disable_collisions link1="schunk_egp50_pincer_2_link" link2="wrist_3_link" reason="Never"/><disable_collisions link1="wrist_1_link" link2="wrist_2_link" reason="Adjacent"/><disable_collisions link1="wrist_1_link" link2="wrist_3_link" reason="Never"/><disable_collisions link1="wrist_2_link" link2="wrist_3_link" reason="Adjacent"/></robot> """)
     )
     ld.add_action(robot_description_semantic_arg)
     kinematics_solver_arg = DeclareLaunchArgument(
@@ -318,91 +218,18 @@ def generate_launch_description():
     )
     ld.add_action(bond_timeout_arg)
 
-    marker_publisher = Node(
-        package="aruco_ros",
-        executable="marker_publisher",
-        prefix = 'xterm -e',
-        output='screen',
-        name="marker_publisher",
-        remappings=[
-          ("camera_info", "/camera_info"),
-          ("image", "/camera_image")]
-        ,
-        parameters=[{
-        "camera_frame": LaunchConfiguration("camera_frame"),
-        "reference_frame": LaunchConfiguration("reference_frame"),
-        "marker_size": LaunchConfiguration("marker_size_arg"),
-        "raw_image_topic": LaunchConfiguration("raw_image_topic"),
-        "camera_info_topic": LaunchConfiguration("camera_info_topic"),}]
-    )
-    realsense_tf_node = Node(
-        package="tf2_ros",
-        executable="static_transform_publisher",
-        prefix = 'xterm -e',
-        output='screen',
-        name="realsense_tf_node",
-        parameters=[{
-        "translation.x": LaunchConfiguration("translation_x"),
-        "translation.y": LaunchConfiguration("translation_y"),
-        "translation.z": LaunchConfiguration("translation_z"),
-        "rotation.x": LaunchConfiguration("rotation_x"),
-        "rotation.y": LaunchConfiguration("rotation_y"),
-        "rotation.z": LaunchConfiguration("rotation_z"),
-        "rotation.w": LaunchConfiguration("rotation_w"),
-        "child_frame_id": LaunchConfiguration("child_frame_id"),
-        "frame_id": LaunchConfiguration("frame_id"),}]
-    )
-    realsense_camera_driver = Node(
-        package="realsense2_camera",
-        executable="realsense2_camera_node",
-        prefix = 'xterm -e',
-        output='screen',
-        name="realsense_camera_driver",
-        remappings=[
-          ("color/camera_info", "/camera_info"),
-          ("color/image_raw", "/camera_image")]
-        ,
-        parameters=[{
-        "camera_name": LaunchConfiguration("camera_name"),
-        "device_type": LaunchConfiguration("device_type"),
-        "publish_tf": LaunchConfiguration("publish_tf"),
-        "frame_id": LaunchConfiguration("frame_id"),
-        "child_frame_id": LaunchConfiguration("child_frame_link"),}]
-    )
     bt_operator = Node(
         package="man2_bt_operator",
         executable="bt_operator",
         prefix = 'xterm -e',
         output='screen',
         name="bt_operator",
-        remappings=[
-          ("~/get_state", "get_state_bt_operator_server"),
-          ("~/change_state", "change_state_bt_operator_server")]
-        ,
         parameters=[{
         "current_bt_xml_filename": LaunchConfiguration("current_bt_xml_filename"),
         "current_bt_xml_name": LaunchConfiguration("current_bt_xml_name"),
         "customized_plugin_lib_names.man2_bt_skill_clients": LaunchConfiguration("man2_bt_skill_clients"),
         "customized_plugin_lib_names.ur_robot_skill_clients": LaunchConfiguration("ur_robot_skill_clients"),
         "default_plugin_lib_names": LaunchConfiguration("default_plugin_lib_names"),}]
-    )
-    detect_acuco_marker_action_server = Node(
-        package="detect_aruco_marker_skill",
-        executable="detect_aruco_marker_action_server",
-        prefix = 'xterm -e',
-        output='screen',
-        name="detect_acuco_marker_action_server",
-        remappings=[
-          ("~/get_state", "get_state_aruco_marker_action_server"),
-          ("~/change_state", "change_state_aruco_marker_action_server")]
-        ,
-        parameters=[{
-        "bond_disable_heartbeat_timeout": LaunchConfiguration("bond_disable_heartbeat_timeout"),
-        "required_pose_num": LaunchConfiguration("required_pose_num"),
-        "sub_marker_topic": LaunchConfiguration("sub_marker_topic"),
-        "sub_rate": LaunchConfiguration("sub_rate"),
-        "timeout": LaunchConfiguration("timeout"),
-        "use_sim_time": LaunchConfiguration("use_sim_time"),}]
     )
     moveit_skill_server = Node(
         package="moveit_skills",
@@ -452,12 +279,6 @@ def generate_launch_description():
         prefix = 'xterm -e',
         output='screen',
         name="lifecycle_manager",
-        remappings=[
-          ("detect_aruco_marker_action_server/get_state", "get_state_aruco_marker_action_server"),
-          ("detect_aruco_marker_action_server/change_state", "change_state_aruco_marker_action_server"),
-          ("bt_operator/get_state", "get_state_bt_operator_server"),
-          ("bt_operator/change_state", "change_state_bt_operator_server")]
-        ,
         parameters=[{
         "autostart": LaunchConfiguration("autostart"),
         "node_names": LaunchConfiguration("node_names"),
@@ -467,45 +288,16 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([get_package_share_directory('ur5e_cell_moveit_config') + '/launch/robot.launch.py'])
     )
 
-    ld.add_action(marker_publisher)
-    ld.add_action(realsense_tf_node)
-    ld.add_action(realsense_camera_driver)
     ld.add_action(bt_operator)
-    ld.add_action(detect_acuco_marker_action_server)
     ld.add_action(moveit_skill_server)
     ld.add_action(ur_io_control_gripper_skill_server)
     ld.add_action(lifecycle_manager)
     ld.add_action(include_ur5e_cell_moveit_config)
-    ld.add_action(camera_frame_arg)
-    ld.add_action(reference_frame_arg)
-    ld.add_action(marker_size_arg_arg)
-    ld.add_action(raw_image_topic_arg)
-    ld.add_action(camera_info_topic_arg)
-    ld.add_action(translation_x_arg)
-    ld.add_action(translation_y_arg)
-    ld.add_action(translation_z_arg)
-    ld.add_action(rotation_x_arg)
-    ld.add_action(rotation_y_arg)
-    ld.add_action(rotation_z_arg)
-    ld.add_action(rotation_w_arg)
-    ld.add_action(child_frame_id_arg)
-    ld.add_action(frame_id_arg)
-    ld.add_action(camera_name_arg)
-    ld.add_action(device_type_arg)
-    ld.add_action(publish_tf_arg)
-    ld.add_action(frame_id_arg)
-    ld.add_action(child_frame_link_arg)
     ld.add_action(current_bt_xml_filename_arg)
     ld.add_action(current_bt_xml_name_arg)
     ld.add_action(man2_bt_skill_clients_arg)
     ld.add_action(ur_robot_skill_clients_arg)
     ld.add_action(default_plugin_lib_names_arg)
-    ld.add_action(bond_disable_heartbeat_timeout_arg)
-    ld.add_action(required_pose_num_arg)
-    ld.add_action(sub_marker_topic_arg)
-    ld.add_action(sub_rate_arg)
-    ld.add_action(timeout_arg)
-    ld.add_action(use_sim_time_arg)
     ld.add_action(use_sim_time_arg)
     ld.add_action(planning_pipeline_arg)
     ld.add_action(planner_id_arg)

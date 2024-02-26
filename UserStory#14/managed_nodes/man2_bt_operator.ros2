@@ -1,0 +1,76 @@
+man2_bt_operator:# This must be the exact package name
+  fromGitRepo: "https://gitlab.cc-asp.fraunhofer.de/ipa326/demonstrator/bt_based_application_framework.git:50y_demo"
+  artifacts:
+    bt_operator: # change to exector name
+      node: bt_operator
+      subscribers:
+        "bond":
+          type: "bond/msg/Status"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+      publishers:
+        "bond":
+          type: "bond/msg/Status"
+        "~/transition_event":
+          type: "lifecycle_msgs/msg/TransitionEvent"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+      serviceservers:
+        "~/change_state":
+          type: "lifecycle_msgs/srv/ChangeState"
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_available_states":
+          type: "lifecycle_msgs/srv/GetAvailableStates"
+        "~/get_available_transitions":
+          type: "lifecycle_msgs/srv/GetAvailableTransitions"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/get_state":
+          type: "lifecycle_msgs/srv/GetState"
+        "~/get_transition_graph":
+          type: "lifecycle_msgs/srv/GetAvailableTransitions"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"
+      actionservers:
+        "start_application":
+          type: "man2_msgs/action/RunApplication"
+      parameters:
+        "bond_disable_heartbeat_timeout":
+          type: Boolean
+          value: True
+        "bt_loop_duration":
+          type: Integer
+          value: 10
+        "current_bt_xml_filename":
+          type: String
+          value: "/home/admin326/workspaces/ros2_ws/install/man2_bt_operator/share/man2_bt_operator/tree/default_bt_xml_filename.xml"
+        "current_bt_xml_name":
+          type: String
+          value: "MoveHome"
+        "customized_plugin_lib_names.man2_bt_skill_clients":
+          type:Array [String]
+          value: "['compute_path_to_state_client', 'compute_path_to_pose_client', 'compute_path_to_point_client', 'execute_trajectory_client', 'set_path_constraints', 'get_current_ik_frame_pose_client', 'update_pose', 'split_pose', 'create_pose', 'update_orientation_in_pose', 'detect_aruco_marker_client', 'print_value']"
+        "customized_plugin_lib_names.ur_robot_skill_clients":
+          type:Array [String]
+          value: "['io_control_gripper', 'get_ur_robot_state', 'get_ur_safety_state', 'get_ur_program_state', 'check_safety_mode', 'check_robot_mode', 'is_robot_running', 'is_safety_normal', 'is_program_running']"
+        "default_plugin_lib_names":
+          type:Array [String]
+          value: "['util_plugin_print_value']"
+        "print_bt_status":
+          type: Boolean
+          value: False
+        "server_timeout":
+          type: Integer
+          value: 1000
+        "use_sim_time":
+          type: Boolean
+          value: False
