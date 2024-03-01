@@ -7,6 +7,7 @@ It holds the launch file to run the following nodes:
 - marker_publisher
 - realsense_tf_node
 - realsense_camera_driver
+- moveit_config_server
 - bt_operator
 - detect_acuco_marker_action_server
 - moveit_skill_server
@@ -16,17 +17,9 @@ It holds the launch file to run the following nodes:
 The listed nodes offer the following connections:
 - Subscriber: camera_info_sub [sensor_msgs/CameraInfo]
 - Subscriber: camera_image_sub [sensor_msgs/Image]
-- Publisher: /camera_info [sensor_msgs/CameraInfo]
-- Publisher: /camera_image [sensor_msgs/Image]
+- Publisher: /camera/realsense_camera_driver/color/camera_info [sensor_msgs/CameraInfo]
+- Publisher: /camera/realsense_camera_driver/color/image_raw [sensor_msgs/Image]
 - ActionServer: start_application [man2_msgs/RunApplication]
-- ServiceServer: get_state_bt_operator_server [lifecycle_msgs/GetState]
-- ServiceServer: change_state_bt_operator_server [lifecycle_msgs/ChangeState]
-- ServiceServer: get_state_aruco_marker_action_server [lifecycle_msgs/GetState]
-- ServiceServer: change_state_aruco_marker_action_server [lifecycle_msgs/ChangeState]
-- ServiceClient: get_state_aruco_marker_action_server_client [lifecycle_msgs/GetState]
-- ServiceClient: change_state_arcuro_marker_action_server_client [lifecycle_msgs/ChangeState]
-- ServiceClient: get_state_bt_operator_client [lifecycle_msgs/GetState]
-- ServiceClient: change_state_bt_operator_client [lifecycle_msgs/ChangeState]
 
 ## Installation
 

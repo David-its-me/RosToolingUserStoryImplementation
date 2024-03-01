@@ -2,7 +2,7 @@ realsense2_camera:
   fromGitRepo: "https://github.com/ipa-rwu/realsense_camera_calibrated.git"
   artifacts:
     realsense2_camera_node:
-      node: camera
+      node: realsense2_camera_node
       publishers:
         "color/camera_info":
           type: "sensor_msgs/msg/CameraInfo"
@@ -25,7 +25,7 @@ realsense2_camera:
       serviceservers:
         "device_info":
           type: "realsense2_camera_msgs/srv/DeviceInfo"
-      parameters:
+      parameters:/*
         "align_depth.enable":
           type: Boolean
           value: False
@@ -34,7 +34,7 @@ realsense2_camera:
           value: 16
         "angular_velocity_cov":
           type: Double
-          value: 0.01
+          value: 0.01*/
         "frame_id":
           type: String
         "child_frame_id":
@@ -43,7 +43,7 @@ realsense2_camera:
           type: String
           value: link
         "camera_name": #prefix of frame name
-          type: String
+          type: String /*
         "clip_distance":
           type: Double
           value: -2.0
@@ -172,10 +172,10 @@ realsense2_camera:
           value: 0
         "depth_qos":
           type: String
-          value: SYSTEM_DEFAULT
+          value: SYSTEM_DEFAULT */
         "device_type":
           type: String
-          value: ""
+          value: "" /*
         "diagnostics_period":
           type: Double
           value: 0.0
@@ -283,13 +283,13 @@ realsense2_camera:
           value: 0
         "pointcloud.stream_index_filter":
           type: Integer
-          value: 0
+          value: 0*/
         "publish_odom_tf":
           type: Boolean
           value: True
         "publish_tf":
           type: Boolean
-          value: False
+          value: False /*
         "qos_overrides./parameter_events.publisher.depth":
           type: Integer
           value: 1000
@@ -439,4 +439,4 @@ realsense2_camera:
           value: False
         "wait_for_device_timeout":
           type: Double
-          value: -1.0
+          value: -1.0*/

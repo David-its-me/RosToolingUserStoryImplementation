@@ -55,9 +55,57 @@ moveit_skills: # This must be the exact package name
         "get_current_ik_frame_pose":
           type: "man2_msgs/action/GetCurrentIKFramePose"
       parameters:
-        "bond_disable_heartbeat_timeout":
+        "step_size":
+          type: Double
+          value: 0.005
+        "min_fraction":
+          type: Double
+          value: 0.5
+        "planning_time":
+          type: Double
+          value: 5.0
+        "moveit_controller_manager":
+          type: String
+          value: "moveit_simple_controller_manager/MoveItSimpleControllerManager"
+        "moveit_simple_controller_manager.controller_names":
+          type: Array[String]
+          value: ["joint_trajectory_controller"]
+        "moveit_simple_controller_manager.joint_trajectory_controller.type":
+          type: String
+          value: FollowJointTrajectory
+        "moveit_simple_controller_manager.joint_trajectory_controller.action_ns":
+          type: String
+          value: follow_joint_trajectory
+        "moveit_simple_controller_manager.joint_trajectory_controller.default":
           type: Boolean
-          value: None
+          value: True
+        "moveit_simple_controller_manager.joint_trajectory_controller.joints":
+          type: Array[String]
+          value: ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]
+        "planning_scene_monitor_options.name":
+          type: String
+          value: "planning_scene_monitor"
+        "planning_scene_monitor_options.robot_description":
+          type: String
+          value: "robot_description"    
+        "planning_scene_monitor_options.joint_state_topic":
+          type: String
+          value: "/joint_states" 
+        "planning_scene_monitor_options.attached_collision_object_topic":
+          type: String
+          value: "/moveit_cpp/planning_scene_monitor"
+        "planning_scene_monitor_options.publish_planning_scene_topic":
+          type: String   
+          value: "/moveit_cpp/publish_planning_scene"  
+        "planning_scene_monitor_options.monitored_planning_scene_topic":
+          type: String
+          value: "/moveit_cpp/monitored_planning_scene"
+        "planning_scene_monitor_options.wait_for_initial_state_timeout":
+          type: Double
+          value: 10.0
+        "planning_pipelines.pipeline_names":
+          type: Array[String]
+          value: ["pilz_industrial_motion_planner", "ompl"]                               	                      
         "get_planning_scene_service_name":
           type: String
           value: "compute_path_moveitcpp_skill/get_planning_scene"
@@ -73,67 +121,30 @@ moveit_skills: # This must be the exact package name
         "jump_threshold":
           type: Double
           value: 0.0
-        "max_acceleration_scaling_factor":
-          type: Double
-          value: 0.3
-        "max_velocity_scaling_factor":
-          type: Double
-          value: 0.1
-        "min_fraction":
-          type: Double
-          value: 0.5
-        "planner_id":
-          type: String
-          value: "RRTstarkConfigDefault"
-        "planning_attempts":
+        "plan_request_params.planning_attempts":
           type: Integer
           value: 10
-        "planning_pipeline":
+        "plan_request_params.planning_pipeline":
           type: String
           value: "ompl"
-        "planning_time":
+        "plan_request_params.planner_id":
+          type: String
+          value: "RRTstarkConfigDefault"  
+        "plan_request_params.range":
           type: Double
-          value: 1.0
-        "step_size":
+          value: 0.0
+        "plan_request_params.max_acceleration_scaling_factor":
           type: Double
-          value: 0.005
+          value: 0.3
+        "plan_request_params.max_velocity_scaling_factor":
+          type: Double
+          value: 0.1
         "use_sim_time":
           type: Boolean
           value: False
-        "robot_description":
-          type: String
-          value: "Please put the robot description in here as an XML String"
-        "robot_description_semantic":
-          type: String
-          value: "Please put the robot description  semantic in here as an XML String"
-        "robot_description_kinematics/arm/kinematics_solver":
-    	  type: String
-        "robot_description_kinematics/arm/kinematics_solver_search_resolution":
-          type: Double
-        "robot_description_kinematics/arm/kinematics_solver_timeout":
-          type: Double          	
-        "planning_pipelines/pipeline_names":
-          type: Array[String]
-        "pilz_industrial_motion_planner/planning_plugin":
-          type: String
-        "pilz_industrial_motion_planner/request_adapters":
-          type: String
-        "pilz_industrial_motion_planner/default_planner_config":
-          type: String
-        "pilz_industrial_motion_planner/capabilities":
-          type: String
-        "planning_scene_monitor_options/name":
-          type: String
-        "planning_scene_monitor_options/robot_description":
-          type: String    
-        "planning_scene_monitor_options/joint_state_topic":
-          type: String    
-        "planning_scene_monitor_options/attached_collision_object_topic":
-          type: String
-        "planning_scene_monitor_options/publish_planning_scene_topic":
-          type: String    
-        "planning_scene_monitor_options/monitored_planning_scene_topic":
-          type: String
-        "planning_scene_monitor_options/wait_for_initial_state_timeout":
-          type: Double                                                                                             
+        "wait_server_timeout":
+    	  type: Integer
+    	  value: 10
+
+                                                                                            
             

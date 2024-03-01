@@ -1,0 +1,13 @@
+moveit_skills:
+  fromGitRepo: "https://gitlab.cc-asp.fraunhofer.de/ipa326/demonstrator/bt_based_application_framework"
+  artifacts:
+    moveit_config_server: # change to executor name
+      node: moveit_config_server
+      serviceservers:
+        "reload_parameters":
+          type: "std_srvs/srv/Trigger"
+      parameters:
+      	robot_name:
+      	  type: String  	
+      	moveit_config_pkg:
+      	  type: String

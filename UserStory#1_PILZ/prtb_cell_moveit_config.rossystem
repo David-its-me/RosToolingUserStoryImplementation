@@ -1,2 +1,0 @@
-prbt_cell_moveit_config:
-  fromFile: "prbt_cell_bringup/launch/bringup.launch.py"
