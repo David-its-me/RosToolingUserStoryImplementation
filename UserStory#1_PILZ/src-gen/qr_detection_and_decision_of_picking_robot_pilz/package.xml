@@ -20,7 +20,7 @@
   <exec_depend>moveit_skills</exec_depend>
   <exec_depend>man2_bt_operator</exec_depend>
   <exec_depend>detect_aruco_marker_skill</exec_depend>
-  <exec_depend>io_control_gripper_skill</exec_depend>
+  <exec_depend>gripper_command_skills</exec_depend>
   <exec_depend>nav2_lifecycle_manager</exec_depend>
   <exec_depend>prbt_cell_bringup</exec_depend>
 

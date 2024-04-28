@@ -1,0 +1,12 @@
+realsense_tf_node:
+  ros__parameters:
+    translation_x: -0.00640796
+    translation_y: -0.0551158
+    translation_z: 0.00796752
+    rotation_x: -0.529877
+    rotation_y: 0.53423
+    rotation_z: -0.467606
+    rotation_w: -0.463867
+    child_frame_id: camera_link
+    frame_id: tool0
+

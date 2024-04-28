@@ -1,0 +1,28 @@
+tf2_ros:
+  artifacts:
+    static_transform_publisher:
+      node: static_transform_publisher
+      publishers:
+        "tf_static":
+          type: "tf2_msgs/msg/TFMessage"
+      parameters:
+        "child_frame_id":
+          type: String
+        "frame_id":
+          type: String
+        "rotation.w":
+          type: Double
+        "rotation.x":
+          type: Double
+        "rotation.y":
+          type: Double
+        "rotation.z":
+          type: Double
+        "translation.x":
+          type: Double
+        "translation.y":
+          type: Double
+        "translation.z":
+          type: Double
+        "use_sim_time":
+          type: Boolean

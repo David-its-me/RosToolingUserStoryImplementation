@@ -1,0 +1,4 @@
+moveit:
+  ros__parameters:
+    translation_x: -0.00640796
+

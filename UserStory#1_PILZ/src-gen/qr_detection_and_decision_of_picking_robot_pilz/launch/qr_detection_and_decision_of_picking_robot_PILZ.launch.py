@@ -7,7 +7,7 @@ from launch.substitutions import LaunchConfiguration, PythonExpression, PathJoin
 
 def generate_launch_description():
     ld = LaunchDescription()
-    
+
     camera_frame_arg = DeclareLaunchArgument(
         "camera_frame", default_value=TextSubstitution(text="camera_color_optical_frame")
     )
@@ -28,42 +28,11 @@ def generate_launch_description():
         "camera_info_topic", default_value=TextSubstitution(text="camera/color/camera_info")
     )
     ld.add_action(camera_info_topic_arg)
-    translation_x_arg = DeclareLaunchArgument(
-        "translation_x", default_value=TextSubstitution(text="-0.00640796")
-    )
-    ld.add_action(translation_x_arg)
-    translation_y_arg = DeclareLaunchArgument(
-        "translation_y", default_value=TextSubstitution(text="-0.0551158")
-    )
-    ld.add_action(translation_y_arg)
-    translation_z_arg = DeclareLaunchArgument(
-        "translation_z", default_value=TextSubstitution(text="0.00796752")
-    )
-    ld.add_action(translation_z_arg)
-    rotation_x_arg = DeclareLaunchArgument(
-        "rotation_x", default_value=TextSubstitution(text="-0.529877")
-    )
-    ld.add_action(rotation_x_arg)
-    rotation_y_arg = DeclareLaunchArgument(
-        "rotation_y", default_value=TextSubstitution(text="0.53423")
-    )
-    ld.add_action(rotation_y_arg)
-    rotation_z_arg = DeclareLaunchArgument(
-        "rotation_z", default_value=TextSubstitution(text="-0.467606")
-    )
-    ld.add_action(rotation_z_arg)
-    rotation_w_arg = DeclareLaunchArgument(
-        "rotation_w", default_value=TextSubstitution(text="-0.463867")
-    )
-    ld.add_action(rotation_w_arg)
-    child_frame_id_arg = DeclareLaunchArgument(
-        "child_frame_id", default_value=TextSubstitution(text="camera_link")
-    )
-    ld.add_action(child_frame_id_arg)
-    frame_id_arg = DeclareLaunchArgument(
-        "frame_id", default_value=TextSubstitution(text="tool0")
-    )
-    ld.add_action(frame_id_arg)
+    realsense_tf_node_config = os.path.join(
+        get_package_share_directory('qr_detection_and_decision_of_picking_robot_pilz'),
+        'config',
+        'realsense_tf_node.yaml'
+        )
     camera_name_arg = DeclareLaunchArgument(
         "camera_name", default_value=TextSubstitution(text="camera")
     )
@@ -112,118 +81,16 @@ def generate_launch_description():
         "default_plugin_lib_names", default_value=TextSubstitution(text="[util_plugin_print_value]")
     )
     ld.add_action(default_plugin_lib_names_arg)
-    bond_disable_heartbeat_timeout_arg = DeclareLaunchArgument(
-        "bond_disable_heartbeat_timeout", default_value=TextSubstitution(text="true")
-    )
-    ld.add_action(bond_disable_heartbeat_timeout_arg)
-    required_pose_num_arg = DeclareLaunchArgument(
-        "required_pose_num", default_value=TextSubstitution(text="2")
-    )
-    ld.add_action(required_pose_num_arg)
-    sub_marker_topic_arg = DeclareLaunchArgument(
-        "sub_marker_topic", default_value=TextSubstitution(text="/marker")
-    )
-    ld.add_action(sub_marker_topic_arg)
-    sub_rate_arg = DeclareLaunchArgument(
-        "sub_rate", default_value=TextSubstitution(text="10")
-    )
-    ld.add_action(sub_rate_arg)
-    timeout_arg = DeclareLaunchArgument(
-        "timeout", default_value=TextSubstitution(text="5000")
-    )
-    ld.add_action(timeout_arg)
-    use_sim_time_arg = DeclareLaunchArgument(
-        "use_sim_time", default_value=TextSubstitution(text="false")
-    )
-    ld.add_action(use_sim_time_arg)
-    use_sim_time_arg = DeclareLaunchArgument(
-        "use_sim_time", default_value=TextSubstitution(text="false")
-    )
-    ld.add_action(use_sim_time_arg)
-    plan_request_params_planning_pipeline_arg = DeclareLaunchArgument(
-        "plan_request_params_planning_pipeline", default_value=TextSubstitution(text="pilz_industrial_motion_planner")
-    )
-    ld.add_action(plan_request_params_planning_pipeline_arg)
-    plan_request_params_planner_id_arg = DeclareLaunchArgument(
-        "plan_request_params_planner_id", default_value=TextSubstitution(text="PTP")
-    )
-    ld.add_action(plan_request_params_planner_id_arg)
-    plan_request_params_planning_attempts_arg = DeclareLaunchArgument(
-        "plan_request_params_planning_attempts", default_value=TextSubstitution(text="10")
-    )
-    ld.add_action(plan_request_params_planning_attempts_arg)
-    step_size_arg = DeclareLaunchArgument(
-        "step_size", default_value=TextSubstitution(text="0.005")
-    )
-    ld.add_action(step_size_arg)
-    min_fraction_arg = DeclareLaunchArgument(
-        "min_fraction", default_value=TextSubstitution(text="0.5")
-    )
-    ld.add_action(min_fraction_arg)
-    max_acceleration_scaling_factor_arg = DeclareLaunchArgument(
-        "max_acceleration_scaling_factor", default_value=TextSubstitution(text="0.1")
-    )
-    ld.add_action(max_acceleration_scaling_factor_arg)
-    planning_time_arg = DeclareLaunchArgument(
-        "planning_time", default_value=TextSubstitution(text="1.0")
-    )
-    ld.add_action(planning_time_arg)
-    planning_pipelines_pipeline_names_arg = DeclareLaunchArgument(
-        "planning_pipelines_pipeline_names", default_value=TextSubstitution(text="[ompl, pilz_industrial_motion_planner]")
-    )
-    ld.add_action(planning_pipelines_pipeline_names_arg)
-    planning_scene_monitor_options_name_arg = DeclareLaunchArgument(
-        "planning_scene_monitor_options_name", default_value=TextSubstitution(text="planning_scene_monitor")
-    )
-    ld.add_action(planning_scene_monitor_options_name_arg)
-    planning_scene_monitor_options_robot_description_arg = DeclareLaunchArgument(
-        "planning_scene_monitor_options_robot_description", default_value=TextSubstitution(text="robot_description")
-    )
-    ld.add_action(planning_scene_monitor_options_robot_description_arg)
-    planning_scene_monitor_options_joint_state_topic_arg = DeclareLaunchArgument(
-        "planning_scene_monitor_options_joint_state_topic", default_value=TextSubstitution(text="/joint_states")
-    )
-    ld.add_action(planning_scene_monitor_options_joint_state_topic_arg)
-    planning_scene_monitor_options_attached_collision_object_topic_arg = DeclareLaunchArgument(
-        "planning_scene_monitor_options_attached_collision_object_topic", default_value=TextSubstitution(text="/moveit_cpp/planning_scene_monitor")
-    )
-    ld.add_action(planning_scene_monitor_options_attached_collision_object_topic_arg)
-    planning_scene_monitor_options_publish_planning_scene_topic_arg = DeclareLaunchArgument(
-        "planning_scene_monitor_options_publish_planning_scene_topic", default_value=TextSubstitution(text="/moveit_cpp/publish_planning_scene")
-    )
-    ld.add_action(planning_scene_monitor_options_publish_planning_scene_topic_arg)
-    planning_scene_monitor_options_monitored_planning_scene_topic_arg = DeclareLaunchArgument(
-        "planning_scene_monitor_options_monitored_planning_scene_topic", default_value=TextSubstitution(text="/moveit_cpp/monitored_planning_scene")
-    )
-    ld.add_action(planning_scene_monitor_options_monitored_planning_scene_topic_arg)
-    planning_scene_monitor_options_wait_for_initial_state_timeout_arg = DeclareLaunchArgument(
-        "planning_scene_monitor_options_wait_for_initial_state_timeout", default_value=TextSubstitution(text="10.0")
-    )
-    ld.add_action(planning_scene_monitor_options_wait_for_initial_state_timeout_arg)
-    moveit_simple_controller_manager_controller_names_arg = DeclareLaunchArgument(
-        "moveit_simple_controller_manager_controller_names", default_value=TextSubstitution(text="[joint_trajectory_controller]")
-    )
-    ld.add_action(moveit_simple_controller_manager_controller_names_arg)
-    moveit_simple_controller_joint_trajectory_controller_type_arg = DeclareLaunchArgument(
-        "moveit_simple_controller_joint_trajectory_controller_type", default_value=TextSubstitution(text="FollowJointTrajectory")
-    )
-    ld.add_action(moveit_simple_controller_joint_trajectory_controller_type_arg)
-    moveit_simple_controller_joint_trajectory_controller_action_ns_arg = DeclareLaunchArgument(
-        "moveit_simple_controller_joint_trajectory_controller_action_ns", default_value=TextSubstitution(text="follow_joint_trajectory")
-    )
-    ld.add_action(moveit_simple_controller_joint_trajectory_controller_action_ns_arg)
-    moveit_simple_controller_joint_trajectory_controller_default_arg = DeclareLaunchArgument(
-        "moveit_simple_controller_joint_trajectory_controller_default", default_value=TextSubstitution(text="true")
-    )
-    ld.add_action(moveit_simple_controller_joint_trajectory_controller_default_arg)
-    moveit_simple_controller_joint_trajectory_controller_joints_arg = DeclareLaunchArgument(
-        "moveit_simple_controller_joint_trajectory_controller_joints", default_value=TextSubstitution(text="[prbt_joint_1, prbt_joint_2, prbt_joint_3, prbt_joint_4, prbt_joint_5, prbt_joint_6]")
-    )
-    ld.add_action(moveit_simple_controller_joint_trajectory_controller_joints_arg)
-    wait_server_timeout_seconds_arg = DeclareLaunchArgument(
-        "wait_server_timeout_seconds", default_value=TextSubstitution(text="10")
-    )
-    ld.add_action(wait_server_timeout_seconds_arg)
+    detect_acuco_marker_action_server_config = os.path.join(
+        get_package_share_directory('qr_detection_and_decision_of_picking_robot_pilz'),
+        'config',
+        'detect_acuco_marker_action_server.yaml'
+        )
+    moveit_skill_server_config = os.path.join(
+        get_package_share_directory('qr_detection_and_decision_of_picking_robot_pilz'),
+        'config',
+        'moveit_skill_server.yaml'
+        )
     autostart_arg = DeclareLaunchArgument(
         "autostart", default_value=TextSubstitution(text="true")
     )
@@ -233,7 +100,7 @@ def generate_launch_description():
     )
     ld.add_action(node_names_arg)
     bond_timeout_arg = DeclareLaunchArgument(
-        "bond_timeout", default_value=TextSubstitution(text="60.0")
+        "bond_timeout", default_value=TextSubstitution(text="100.0")
     )
     ld.add_action(bond_timeout_arg)
 
@@ -247,7 +114,7 @@ def generate_launch_description():
           ("camera_info", "/camera/realsense_camera_driver/color/camera_info"),
           ("image", "/camera/realsense_camera_driver/color/image_raw")]
         ,
-        parameters=[{
+parameters=[{
         "camera_frame": LaunchConfiguration("camera_frame"),
         "reference_frame": LaunchConfiguration("reference_frame"),
         "marker_size": LaunchConfiguration("marker_size_arg"),
@@ -260,16 +127,7 @@ def generate_launch_description():
         prefix = 'xterm -e',
         output='screen',
         name="realsense_tf_node",
-        parameters=[{
-        "translation.x": LaunchConfiguration("translation_x"),
-        "translation.y": LaunchConfiguration("translation_y"),
-        "translation.z": LaunchConfiguration("translation_z"),
-        "rotation.x": LaunchConfiguration("rotation_x"),
-        "rotation.y": LaunchConfiguration("rotation_y"),
-        "rotation.z": LaunchConfiguration("rotation_z"),
-        "rotation.w": LaunchConfiguration("rotation_w"),
-        "child_frame_id": LaunchConfiguration("child_frame_id"),
-        "frame_id": LaunchConfiguration("frame_id"),}]
+        parameters = [realsense_tf_node_config]
     )
     realsense_camera_driver = Node(
         package="realsense2_camera",
@@ -281,7 +139,7 @@ def generate_launch_description():
           ("color/camera_info", "/camera/realsense_camera_driver/color/camera_info"),
           ("color/image_raw", "/camera/realsense_camera_driver/color/image_raw")]
         ,
-        parameters=[{
+parameters=[{
         "camera_name": LaunchConfiguration("camera_name"),
         "device_type": LaunchConfiguration("device_type"),
         "publish_tf": LaunchConfiguration("publish_tf"),
@@ -294,7 +152,7 @@ def generate_launch_description():
         prefix = 'xterm -e',
         output='screen',
         name="moveit_config_server",
-        parameters=[{
+parameters=[{
         "robot_name": LaunchConfiguration("robot_name"),
         "moveit_config_pkg": LaunchConfiguration("moveit_config"),}]
     )
@@ -304,7 +162,7 @@ def generate_launch_description():
         prefix = 'xterm -e',
         output='screen',
         name="bt_operator",
-        parameters=[{
+parameters=[{
         "current_bt_xml_filename": LaunchConfiguration("current_bt_xml_filename"),
         "current_bt_xml_name": LaunchConfiguration("current_bt_xml_name"),
         "customized_plugin_lib_names.man2_bt_skill_clients": LaunchConfiguration("man2_bt_skill_clients"),
@@ -317,13 +175,7 @@ def generate_launch_description():
         prefix = 'xterm -e',
         output='screen',
         name="detect_acuco_marker_action_server",
-        parameters=[{
-        "bond_disable_heartbeat_timeout": LaunchConfiguration("bond_disable_heartbeat_timeout"),
-        "required_pose_num": LaunchConfiguration("required_pose_num"),
-        "sub_marker_topic": LaunchConfiguration("sub_marker_topic"),
-        "sub_rate": LaunchConfiguration("sub_rate"),
-        "timeout": LaunchConfiguration("timeout"),
-        "use_sim_time": LaunchConfiguration("use_sim_time"),}]
+        parameters = [detect_acuco_marker_action_server_config]
     )
     moveit_skill_server = Node(
         package="moveit_skills",
@@ -331,36 +183,14 @@ def generate_launch_description():
         prefix = 'xterm -e',
         output='screen',
         name="moveit_skill_server",
-        parameters=[{
-        "use_sim_time": LaunchConfiguration("use_sim_time"),
-        "plan_request_params.planning_pipeline": LaunchConfiguration("plan_request_params_planning_pipeline"),
-        "plan_request_params.planner_id": LaunchConfiguration("plan_request_params_planner_id"),
-        "plan_request_params.planning_attempts": LaunchConfiguration("plan_request_params_planning_attempts"),
-        "step_size": LaunchConfiguration("step_size"),
-        "min_fraction": LaunchConfiguration("min_fraction"),
-        "plan_request_params.max_acceleration_scaling_factor": LaunchConfiguration("max_acceleration_scaling_factor"),
-        "planning_time": LaunchConfiguration("planning_time"),
-        "planning_pipelines.pipeline_names": LaunchConfiguration("planning_pipelines_pipeline_names"),
-        "planning_scene_monitor_options.name": LaunchConfiguration("planning_scene_monitor_options_name"),
-        "planning_scene_monitor_options.robot_description": LaunchConfiguration("planning_scene_monitor_options_robot_description"),
-        "planning_scene_monitor_options.joint_state_topic": LaunchConfiguration("planning_scene_monitor_options_joint_state_topic"),
-        "planning_scene_monitor_options.attached_collision_object_topic": LaunchConfiguration("planning_scene_monitor_options_attached_collision_object_topic"),
-        "planning_scene_monitor_options.publish_planning_scene_topic": LaunchConfiguration("planning_scene_monitor_options_publish_planning_scene_topic"),
-        "planning_scene_monitor_options.monitored_planning_scene_topic": LaunchConfiguration("planning_scene_monitor_options_monitored_planning_scene_topic"),
-        "planning_scene_monitor_options.wait_for_initial_state_timeout": LaunchConfiguration("planning_scene_monitor_options_wait_for_initial_state_timeout"),
-        "moveit_simple_controller_manager.controller_names": LaunchConfiguration("moveit_simple_controller_manager_controller_names"),
-        "moveit_simple_controller_manager.joint_trajectory_controller.type": LaunchConfiguration("moveit_simple_controller_joint_trajectory_controller_type"),
-        "moveit_simple_controller_manager.joint_trajectory_controller.action_ns": LaunchConfiguration("moveit_simple_controller_joint_trajectory_controller_action_ns"),
-        "moveit_simple_controller_manager.joint_trajectory_controller.default": LaunchConfiguration("moveit_simple_controller_joint_trajectory_controller_default"),
-        "moveit_simple_controller_manager.joint_trajectory_controller.joints": LaunchConfiguration("moveit_simple_controller_joint_trajectory_controller_joints"),
-        "wait_server_timeout": LaunchConfiguration("wait_server_timeout_seconds"),}]
+        parameters = [moveit_skill_server_config]
     )
-    ur_io_control_gripper_skill_server = Node(
-        package="io_control_gripper_skill",
-        executable="main_ur_io_control_gripper_action_server",
+    gripper_command_action_server = Node(
+        package="gripper_command_skills",
+        executable="gripper_command_action_server",
         prefix = 'xterm -e',
         output='screen',
-        name="ur_io_control_gripper_skill_server"
+        name="gripper_command_action_server"
     )
     lifecycle_manager = Node(
         package="nav2_lifecycle_manager",
@@ -368,7 +198,7 @@ def generate_launch_description():
         prefix = 'xterm -e',
         output='screen',
         name="lifecycle_manager",
-        parameters=[{
+parameters=[{
         "autostart": LaunchConfiguration("autostart"),
         "node_names": LaunchConfiguration("node_names"),
         "bond_timeout": LaunchConfiguration("bond_timeout"),}]
@@ -384,65 +214,8 @@ def generate_launch_description():
     ld.add_action(bt_operator)
     ld.add_action(detect_acuco_marker_action_server)
     ld.add_action(moveit_skill_server)
-    ld.add_action(ur_io_control_gripper_skill_server)
+    ld.add_action(gripper_command_action_server)
     ld.add_action(lifecycle_manager)
     ld.add_action(include_prbt_cell_moveit_config)
-    ld.add_action(camera_frame_arg)
-    ld.add_action(reference_frame_arg)
-    ld.add_action(marker_size_arg_arg)
-    ld.add_action(raw_image_topic_arg)
-    ld.add_action(camera_info_topic_arg)
-    ld.add_action(translation_x_arg)
-    ld.add_action(translation_y_arg)
-    ld.add_action(translation_z_arg)
-    ld.add_action(rotation_x_arg)
-    ld.add_action(rotation_y_arg)
-    ld.add_action(rotation_z_arg)
-    ld.add_action(rotation_w_arg)
-    ld.add_action(child_frame_id_arg)
-    ld.add_action(frame_id_arg)
-    ld.add_action(camera_name_arg)
-    ld.add_action(device_type_arg)
-    ld.add_action(publish_tf_arg)
-    ld.add_action(frame_id_arg)
-    ld.add_action(child_frame_link_arg)
-    ld.add_action(robot_name_arg)
-    ld.add_action(moveit_config_arg)
-    ld.add_action(current_bt_xml_filename_arg)
-    ld.add_action(current_bt_xml_name_arg)
-    ld.add_action(man2_bt_skill_clients_arg)
-    ld.add_action(ur_robot_skill_clients_arg)
-    ld.add_action(default_plugin_lib_names_arg)
-    ld.add_action(bond_disable_heartbeat_timeout_arg)
-    ld.add_action(required_pose_num_arg)
-    ld.add_action(sub_marker_topic_arg)
-    ld.add_action(sub_rate_arg)
-    ld.add_action(timeout_arg)
-    ld.add_action(use_sim_time_arg)
-    ld.add_action(use_sim_time_arg)
-    ld.add_action(plan_request_params_planning_pipeline_arg)
-    ld.add_action(plan_request_params_planner_id_arg)
-    ld.add_action(plan_request_params_planning_attempts_arg)
-    ld.add_action(step_size_arg)
-    ld.add_action(min_fraction_arg)
-    ld.add_action(max_acceleration_scaling_factor_arg)
-    ld.add_action(planning_time_arg)
-    ld.add_action(planning_pipelines_pipeline_names_arg)
-    ld.add_action(planning_scene_monitor_options_name_arg)
-    ld.add_action(planning_scene_monitor_options_robot_description_arg)
-    ld.add_action(planning_scene_monitor_options_joint_state_topic_arg)
-    ld.add_action(planning_scene_monitor_options_attached_collision_object_topic_arg)
-    ld.add_action(planning_scene_monitor_options_publish_planning_scene_topic_arg)
-    ld.add_action(planning_scene_monitor_options_monitored_planning_scene_topic_arg)
-    ld.add_action(planning_scene_monitor_options_wait_for_initial_state_timeout_arg)
-    ld.add_action(moveit_simple_controller_manager_controller_names_arg)
-    ld.add_action(moveit_simple_controller_joint_trajectory_controller_type_arg)
-    ld.add_action(moveit_simple_controller_joint_trajectory_controller_action_ns_arg)
-    ld.add_action(moveit_simple_controller_joint_trajectory_controller_default_arg)
-    ld.add_action(moveit_simple_controller_joint_trajectory_controller_joints_arg)
-    ld.add_action(wait_server_timeout_seconds_arg)
-    ld.add_action(autostart_arg)
-    ld.add_action(node_names_arg)
-    ld.add_action(bond_timeout_arg)
 
     return ld

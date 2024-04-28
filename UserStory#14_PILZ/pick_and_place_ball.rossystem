@@ -1,0 +1,115 @@
+pick_and_place_ball_PILZ: # changed
+  ############################ Moveit and UR DRiver ###################
+  subSystems:
+    prbt_cell_moveit_config #Changed
+  nodes:
+    ########################### Behavior Tree Framework ##############################
+    moveit_config_server: # This is managed node. It receives all moveit configurations from other nodes and makes it available for the moveit skill server
+      from: "moveit_skills.moveit_config_server"
+      parameters: 
+        - robot_name: "moveit_config_server::robot_name"
+          value: "prbt_cell" #Changed
+        - moveit_config: "moveit_config_server::moveit_config_pkg"
+          value: "prbt_cell_moveit_config" #changed
+          
+    bt_operator: # This is a managed node. It contains all the internal bt_functions
+      from: "man2_bt_operator.bt_operator"
+      interfaces:
+        - start_application: as-> "bt_operator::start_application"
+        #- get_state_bt_operator_server: ss-> "bt_operator::~/get_state"
+        #- change_state_bt_operator_server: ss-> "bt_operator::~/change_state"
+      parameters:
+        - current_bt_xml_filename: "bt_operator::current_bt_xml_filename"
+          value: "Masterarbeit_Cloud/ma-lieb-robotics-integration/04_Umsetzung/Implementation/Behaviour Tree/SimpleMovement.xml -p run_loop:=false"
+        - current_bt_xml_name: "bt_operator::current_bt_xml_name"
+          value: "MoveToQR"
+        - man2_bt_skill_clients: "bt_operator::customized_plugin_lib_names.man2_bt_skill_clients"
+          value: ['compute_path_to_state_client', 
+          'compute_path_to_pose_client', 
+          'compute_path_to_point_client', 
+          'execute_trajectory_client', 
+          'set_path_constraints', 
+          'get_current_ik_frame_pose_client', 
+          'update_pose', 
+          'split_pose', 
+          'create_pose', 
+          'update_orientation_in_pose', 
+          'detect_aruco_marker_client', 
+          'print_value',
+          'print_ros_msg']
+        - ur_robot_skill_clients: "bt_operator::customized_plugin_lib_names.ur_robot_skill_clients"
+          value: ['io_control_gripper', 'get_ur_robot_state', 'get_ur_safety_state', 'get_ur_program_state', 'check_safety_mode', 'check_robot_mode', 'is_robot_running', 'is_safety_normal', 'is_program_running']
+        - default_plugin_lib_names: "bt_operator::default_plugin_lib_names"
+          value: ['util_plugin_print_value']
+   
+    moveit_skill_server: # This is a managed node
+      from: "moveit_skills.moveit_skill_server"
+      interfaces:
+        #- compute_path_to_pose: as-> "moveit_skill_server_node::compute_path_to_pose"
+        #- compute_path_to_point: as-> "moveit_skill_server_node::compute_path_to_point"
+        #- compute_path_to_state: as-> "moveit_skill_server_node::compute_path_to_state"
+        #- execute_trajectory: as-> "moveit_skill_server_node::execute_trajectory"
+        #- get_current_ik_frame_pose: as-> "moveit_skill_server_node::get_current_ik_frame_pose"
+      parameters:
+        - use_sim_time: "moveit_skill_server_node::use_sim_time"
+          value: false
+        - plan_request_params_planning_pipeline: "moveit_skill_server_node::plan_request_params.planning_pipeline"
+          value: pilz_industrial_motion_planner
+        - plan_request_params_planner_id: "moveit_skill_server_node::plan_request_params.planner_id"
+          value: PTP
+        - plan_request_params_planning_attempts: "moveit_skill_server_node::plan_request_params.planning_attempts"
+          value: 10
+        - step_size: "moveit_skill_server_node::step_size"
+          value: 0.005
+        - min_fraction: "moveit_skill_server_node::min_fraction"
+          value: 0.50
+        - max_acceleration_scaling_factor: "moveit_skill_server_node::plan_request_params.max_acceleration_scaling_factor"
+          value: 0.1
+        - planning_time: "moveit_skill_server_node::planning_time"
+          value: 1.0
+        - planning_pipelines_pipeline_names: "moveit_skill_server_node::planning_pipelines.pipeline_names"
+          value: ["ompl", "pilz_industrial_motion_planner"]
+        - planning_scene_monitor_options_name: "moveit_skill_server_node::planning_scene_monitor_options.name"
+          value: "planning_scene_monitor"
+        - planning_scene_monitor_options_robot_description: "moveit_skill_server_node::planning_scene_monitor_options.robot_description"
+          value: "robot_description"
+        - planning_scene_monitor_options_joint_state_topic: "moveit_skill_server_node::planning_scene_monitor_options.joint_state_topic"
+          value: "/joint_states"                            
+        - planning_scene_monitor_options_attached_collision_object_topic: "moveit_skill_server_node::planning_scene_monitor_options.attached_collision_object_topic"
+          value: "/moveit_cpp/planning_scene_monitor"
+        - planning_scene_monitor_options_publish_planning_scene_topic: "moveit_skill_server_node::planning_scene_monitor_options.publish_planning_scene_topic"
+          value: "/moveit_cpp/publish_planning_scene"
+        - planning_scene_monitor_options_monitored_planning_scene_topic: "moveit_skill_server_node::planning_scene_monitor_options.monitored_planning_scene_topic"
+          value: "/moveit_cpp/monitored_planning_scene"
+        - planning_scene_monitor_options_wait_for_initial_state_timeout: "moveit_skill_server_node::planning_scene_monitor_options.wait_for_initial_state_timeout"
+          value: 10.0
+        - moveit_simple_controller_manager_controller_names: "moveit_skill_server_node::moveit_simple_controller_manager.controller_names"
+          value: ["arm_controller"] # changed
+        - moveit_simple_controller_joint_trajectory_controller_type: "moveit_skill_server_node::moveit_simple_controller_manager.arm_controller.type" #changed
+          value: FollowJointTrajectory
+        - moveit_simple_controller_joint_trajectory_controller_action_ns: "moveit_skill_server_node::moveit_simple_controller_manager.arm_controller.action_ns" #changed
+          value: follow_joint_trajectory
+        - moveit_simple_controller_joint_trajectory_controller_default: "moveit_skill_server_node::moveit_simple_controller_manager.arm_controller.default" #changed
+          value: true
+        - moveit_simple_controller_joint_trajectory_controller_joints: "moveit_skill_server_node::moveit_simple_controller_manager.arm_controller.joints" #changed
+          value: ["prbt_joint_1", "prbt_joint_2", "prbt_joint_3", "prbt_joint_4", "prbt_joint_5", "prbt_joint_6"]    # changed
+        - wait_server_timeout_seconds: "moveit_skill_server_node::wait_server_timeout"
+          value: 10
+                  	                                                      
+    gripper_command_action_server: # changed # This is a managed node
+      from: "gripper_command_skills.gripper_command_action_server" # changed
+      
+    lifecycle_manager: # responsible to start all the managed nodes above
+      from: "nav2_lifecycle_manager.lifecycle_manager"
+      interfaces:
+        #- get_state_aruco_marker_action_server_client: sc-> "lifecycle_manager::detect_aruco_marker_action_server/get_state"
+        #- change_state_arcuro_marker_action_server_client: sc-> "lifecycle_manager::detect_aruco_marker_action_server/change_state"
+        #- get_state_bt_operator_client: sc-> "lifecycle_manager::bt_operator/get_state"
+        #- change_state_bt_operator_client: sc-> "lifecycle_manager::bt_operator/change_state"
+      parameters:
+        - autostart: "lifecycle_manager::autostart" # Whether to transition nodes to active state on startup.
+          value: true
+        - node_names: "lifecycle_manager::node_names" # Ordered list of node names to bringup through lifecycle transition.
+          value: ['moveit_config_server', 'bt_operator', 'ur_io_control_gripper_skill_server', 'moveit_skill_server']
+        - bond_timeout: "lifecycle_manager::bond_timeout" # Heartbeat timeout. Timeout to transition down all lifecycle nodes of this manager if a server is non-responsive, in seconds. Set to 0 to deactivate. Recommended to be always larger than 0.3s for all-local node discovery. Note: if a server cleanly exits the manager will immediately be notified.
+          value: 100.0

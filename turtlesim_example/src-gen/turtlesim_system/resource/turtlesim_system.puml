@@ -1,0 +1,23 @@
+@startuml
+
+/'SUBSYSTEMS'/
+
+  component turtlesim {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+    portin turtlesim.cmd_subscriber as "cmd_subscriber" #blue
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+  component key_teleop {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+    portout key_teleop.cmd_publisher as "cmd_publisher" #blue
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+  key_teleop.cmd_publisher --> turtlesim.cmd_subscriber
+
+@enduml

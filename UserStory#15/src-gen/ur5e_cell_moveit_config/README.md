@@ -25,7 +25,7 @@ sudo apt install ros-ROSDISTRO-ur5e-cell-moveit-config
 To launch this system there is already an existing package that contains the launch file. It can be started by:
 
 ```
-ros2 launch ur5e_cell_moveit_config robot.launch.py
+ros2 launch ur5e_cell_moveit_config robot.launch.py 
 ```
 
 

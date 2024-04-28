@@ -1,0 +1,71 @@
+man2_msgs:
+  actions:
+    RunApplication
+      goal
+        string behavior_tree_filename
+        bool run_in_loop
+        int16 sleep
+      result
+        bool success
+      feedback
+        float64 percentage
+        'builtin_interfaces/msg/Duration'[] execution_time
+        int16 number_of_recoveries
+    ## DETECTION
+    ArucoMarkerDetection
+      goal
+        int16 marker_id
+        int16 timeout
+        string sub_topic_name
+        int8 required_pose_num
+      result
+        uint16 UNKNOWN=720
+        uint16 TIMEOUT=721
+        uint16 WAITSER_ERROR=722
+        uint16 INVALID_INPUT=723
+        uint16 NONE=0
+        uint16 error_code_id
+        'geometry_msgs/msg/PoseStamped' pose
+      feedback
+    ## CONTROL
+    IOGripperCommand
+      goal
+        int8 open_high_pin
+        int8 close_high_pin
+        string io_service_server_name
+        bool open # true: open, false close
+        int16 timeout # timeout for connecting IO server
+      result
+        uint16 UNKNOWN=720
+        uint16 EXECUTE_FAILED=721
+        uint16 SERVER_TIMEOUT=722
+        uint16 NONE=0
+        uint16 error_code_id
+      feedback
+        bool open # current state true: open, false close
+    ## SKILL CLIENTS
+    UpdateOrientationInPose
+      goal
+      result
+      feedback
+    ## MOVEIT
+    ComputePathToPoint
+      goal
+      result
+      feedback
+    ComputePathToPose
+      goal
+      result
+      feedback
+    ComputePathToState
+      goal
+      result
+      feedback
+    ExecuteTrajectory
+      goal
+      result
+      feedback
+    GetCurrentIKFramePose
+      goal
+      result
+      feedback 

@@ -1,0 +1,280 @@
+qr_detection_and_decision_of_picking_robot:
+  ############################ Moveit and UR DRiver ###################
+  subSystems:
+    ur5e_cell_moveit_config
+  nodes:
+    ########################## Realsense ################################
+    marker_publisher:
+      from: "aruco_ros.marker_publisher"
+      interfaces:
+        - camera_info_sub: sub-> "marker_publisher::camera_info"
+        - camera_image_sub: sub-> "marker_publisher::image"
+        - aruco_image_raw: sub-> "marker_publisher::camera/color/image_raw"
+        - aruco_parameter_events: sub-> "marker_publisher::parameter_events"
+        - aruco_debug_pub: pub-> "marker_publisher::debug"
+        - aruco_markers_pub: pub-> "marker_publisher::markers"
+        - aruco_markers_list_pub: pub-> "marker_publisher::markers_list"
+        - aruco_result_pub: pub-> "marker_publisher::result"
+        - aruco_parameter_events_pub: pub-> "marker_publisher::parameter_events"
+        - aruco_rosout_pub: pub-> "marker_publisher::rosout"
+      parameters:
+        - camera_frame: "marker_publisher::camera_frame"
+          value: camera_color_optical_frame
+        - reference_frame: "marker_publisher::reference_frame"
+          value: tool0 #### important to know where the camera is mounted
+        - marker_size_arg: "marker_publisher::marker_size"
+          value: 0.05
+        - raw_image_topic: "marker_publisher::raw_image_topic"
+          value: "camera/color/image_raw"
+        - camera_info_topic: "marker_publisher::camera_info_topic"
+          value: "camera/color/camera_info"
+          
+          
+    realsense_tf_node:
+      from: "tf2_ros.static_transform_publisher"
+      interfaces:
+        - tf_static_pub: pub-> "static_transform_publisher::tf_static"
+      parameters:
+        - translation_x: "static_transform_publisher::translation.x"
+          value: -0.00640796 
+        - translation_y: "static_transform_publisher::translation.y"
+          value: -0.0551158
+        - translation_z: "static_transform_publisher::translation.z"
+          value: 0.00796752
+        - rotation_x: "static_transform_publisher::rotation.x"
+          value: -0.529877
+        - rotation_y: "static_transform_publisher::rotation.y"
+          value: 0.53423
+        - rotation_z: "static_transform_publisher::rotation.z"
+          value: -0.467606
+        - rotation_w: "static_transform_publisher::rotation.w"
+          value: -0.463867
+        - child_frame_id: "static_transform_publisher::child_frame_id"
+          value: camera_link
+        - frame_id: "static_transform_publisher::frame_id"
+          value: tool0   
+    
+    realsense_camera_driver:
+      from: "realsense2_camera.camera"
+      interfaces:
+        - "/camera/realsense_camera_driver/color/camera_info": pub-> "realsense2_camera_node::color/camera_info"
+        - "/camera/realsense_camera_driver/color/image_raw": pub-> "realsense2_camera_node::color/image_raw"
+        - "/camera/realsense_camera_driver/color/metadata": pub-> "realsense2_camera_node::color/metadata"
+        - "/camera/realsense_camera_driver/depth/camera_info": pub-> "realsense2_camera_node::depth/camera_info"
+        - "/camera/realsense_camera_driver/depth/metadata": pub-> "realsense2_camera_node::depth/metadata"
+        - "/camera/realsense_camera_driver/depth/image_rect_raw": pub-> "realsense2_camera_node::depth/image_rect_raw"
+        - "/camera/realsense_camera_driver/extrinsics/depth_to_color": pub-> "realsense2_camera_node::extrinsics/depth_to_color"
+        - "/camera/realsense_camera_driver/imu": pub-> "realsense2_camera_node::imu"
+        - "/camera/realsense_camera_driver/tf_static": pub-> "realsense2_camera_node::tf_static"
+        - "/camera/realsense_camera_driver/device_info": ss-> "realsense2_camera_node::device_info"
+      parameters:
+        - camera_name: "realsense2_camera_node::camera_name"
+          value: camera
+        - device_type: "realsense2_camera_node::device_type"
+          value: d435
+        - publish_tf: "realsense2_camera_node::publish_tf"
+          value: false
+        - frame_id: "realsense2_camera_node::frame_id"
+          value: tool0 ### This is important for the camera position and orientation
+        - child_frame_link: "realsense2_camera_node::child_frame_id"
+          value: camera_link
+
+    ########################### Behavior Tree Framework ##############################
+    moveit_config_server: # This is managed node. It receives all moveit configurations from other nodes and makes it available for the moveit skill server
+      from: "moveit_skills.moveit_config_server"
+      interfaces:
+        - reload_parameters_ss: ss-> "moveit_config_server::reload_parameters"
+      parameters: 
+        - robot_name: "moveit_config_server::robot_name"
+          value: "ur5e_workcell"
+        - moveit_config: "moveit_config_server::moveit_config_pkg"
+          value: "ur5e_cell_moveit_config"
+          
+    bt_operator: # This is a managed node. It contains all the internal bt_functions
+      from: "man2_bt_operator.bt_operator"
+      interfaces:
+        - bt_bond_sub: sub-> "bt_operator::bond"
+        - bt_parameter_events: sub-> "bt_operator::parameter_events"
+        - bt_bond_pub: pub-> "bt_operator::bond"
+        - bt_transition_event_pub: pub-> "bt_navigator::~/transition_event"
+        - bt_parameter_event_pub: pub-> "bt_operator::parameter_events"
+        - bt_rosout_pub: pub-> "bt_operator::rosout"
+        - bt_change_state_ss: ss-> "bt_operator::~/change_state"
+        - bt_describe_parameters_ss: ss-> "bt_operator::~/describe_parameters"
+        - bt_get_available_states_ss: ss-> "bt_navigator::~/get_available_states"
+        - bt_get_available_transitions_ss: ss-> "bt_navigator::~/get_available_transitions"
+        - bt_get_parameter_types_ss: ss-> "bt_operator::~/get_parameter_types"
+        - bt_get_parameters_ss: ss-> "bt_operator::~/get_parameters"
+        - bt_get_state_ss: ss-> "bt_navigator::~/get_state"
+        - bt_get_transition_graph_ss: ss-> "bt_navigator::~/get_transition_graph"
+        - bt_list_parameters_ss: ss-> "bt_operator::~/list_parameters"
+        - bt_set_parameters_ss: ss-> "bt_operator::~/set_parameters"
+        - bt_set_parameters_atomically_ss: ss-> "bt_operator::~/set_parameters_atomically"
+        - bt_start_application_as: as-> "bt_operator::start_application"
+      parameters:
+        - current_bt_xml_filename: "bt_operator::current_bt_xml_filename"
+          value: "Masterarbeit_Cloud/ma-lieb-robotics-integration/04_Umsetzung/Implementation/Behaviour Tree/SimpleMovement.xml -p run_loop:=false"
+        - current_bt_xml_name: "bt_operator::current_bt_xml_name"
+          value: "MoveToQR"
+        - man2_bt_skill_clients: "bt_operator::customized_plugin_lib_names.man2_bt_skill_clients"
+          value: ['compute_path_to_state_client', 
+          'compute_path_to_pose_client', 
+          'compute_path_to_point_client', 
+          'execute_trajectory_client', 
+          'set_path_constraints', 
+          'get_current_ik_frame_pose_client', 
+          'update_pose', 
+          'split_pose', 
+          'create_pose', 
+          'update_orientation_in_pose', 
+          'detect_aruco_marker_client', 
+          'print_value',
+          'print_ros_msg']
+        - ur_robot_skill_clients: "bt_operator::customized_plugin_lib_names.ur_robot_skill_clients"
+          value: ['io_control_gripper', 'get_ur_robot_state', 'get_ur_safety_state', 'get_ur_program_state', 'check_safety_mode', 'check_robot_mode', 'is_robot_running', 'is_safety_normal', 'is_program_running']
+        - default_plugin_lib_names: "bt_operator::default_plugin_lib_names"
+          value: ['util_plugin_print_value']
+			   
+    detect_acuco_marker_action_server: # This is a managed node
+      from: "detect_aruco_marker_skill.detect_aruco_marker"
+      interfaces:
+        - aruco_marker_action_server_bond_sub: sub-> "detect_aruco_marker_action_server::bond"
+        - aruco_marker_action_server_parameter_events_sub: sub-> "detect_aruco_marker_action_server::parameter_events"
+        - aruco_marker_action_server_bond_pub: pub-> "detect_aruco_marker_action_server::bond"
+        - aruco_marker_action_server_transition_event_pub: pub-> "detect_aruco_marker_action_server::~/transition_event"
+        - aruco_marker_action_server_parameter_events_pub: pub-> "detect_aruco_marker_action_server::parameter_events"
+        - aruco_marker_action_server_rosout: pub-> "detect_aruco_marker_action_server::rosout"
+        - aruco_marker_action_server_change_state_ss: ss-> "detect_aruco_marker_action_server::~/change_state"
+        - aruco_marker_action_server_describe_parameters_ss: ss-> "detect_aruco_marker_action_server::~/describe_parameters"
+        - aruco_marker_action_server_get_available_states_ss: ss-> "detect_aruco_marker_action_server::~/get_available_states"
+        - aruco_marker_action_server_get_available_transitions_ss: ss-> "detect_aruco_marker_action_server::~/get_available_transitions"
+        - aruco_marker_action_server_get_parameter_types_ss: ss-> "detect_aruco_marker_action_server::~/get_parameter_types"
+        - aruco_marker_action_server_get_parameters_ss: ss-> "detect_aruco_marker_action_server::~/get_parameters"
+        - aruco_marker_action_server_get_state_ss: ss-> "detect_aruco_marker_action_server::~/get_state"
+        - aruco_marker_action_server_get_transition_graph_ss: ss-> "detect_aruco_marker_action_server::~/get_transition_graph"
+        - aruco_marker_action_server_list_parameters_ss: ss-> "detect_aruco_marker_action_server::~/list_parameters"
+        - aruco_marker_action_server_set_parameters_ss: ss-> "detect_aruco_marker_action_server::~/set_parameters"
+        - aruco_marker_action_server_set_parameters_atomically_ss: ss-> "detect_aruco_marker_action_server::~/set_parameters_atomically"
+        - aruco_marker_action_server_detect_aruco_marker_as: as-> "detect_aruco_marker_action_server::detect_aruco_marker"
+      parameters: 
+        - bond_disable_heartbeat_timeout: "detect_aruco_marker_action_server::bond_disable_heartbeat_timeout"
+          value: true
+        - required_pose_num: "detect_aruco_marker_action_server::required_pose_num"
+          value: 2
+        - sub_marker_topic: "detect_aruco_marker_action_server::sub_marker_topic"
+          value: "/marker"
+        - sub_rate: "detect_aruco_marker_action_server::sub_rate"
+          value: 10
+        - timeout: "detect_aruco_marker_action_server::timeout"
+          value: 5000 #milliseconds
+        - use_sim_time: "detect_aruco_marker_action_server::use_sim_time"
+          value: false
+   
+    moveit_skill_server: # This is a managed node
+      from: "moveit_skills.moveit_skill_server"
+      interfaces:
+        - moveit_skill_server_bond_sub: sub-> "moveit_skill_server_node::bond"
+        - moveit_skill_server_parameter_events_sub: sub-> "moveit_skill_server_node::parameter_events"
+        
+        - moveit_skill_server_bond_pub: pub-> "moveit_skill_server_node::bond"
+        - moveit_skill_server_transition_event_pub: pub-> "moveit_skill_server_node::~/transition_event"
+        - moveit_skill_server_parameter_events_pub: pub-> "moveit_skill_server_node::parameter_events"
+        - moveit_skill_server_rosout_pub: pub-> "moveit_skill_server_node::rosout"
+        
+        - moveit_skill_server_change_state_ss: ss-> "moveit_skill_server_node::~/change_state"
+        - moveit_skill_server_describe_parameters_ss: ss-> "moveit_skill_server_node::~/describe_parameters"
+        - moveit_skill_server_get_available_states_ss: ss-> "moveit_skill_server_node::~/get_available_states"
+        - moveit_skill_server_get_available_transitions_ss: ss-> "moveit_skill_server_node::~/get_available_transitions"
+        - moveit_skill_server_get_parameter_types_ss: ss-> "moveit_skill_server_node::~/get_parameter_types"
+        - moveit_skill_server_get_parameters_ss: ss-> "moveit_skill_server_node::~/get_parameters"
+        - moveit_skill_server_get_state_ss: ss-> "moveit_skill_server_node::~/get_state"
+        - moveit_skill_server_get_transition_graph_ss: ss-> "moveit_skill_server_node::~/get_transition_graph"
+        - moveit_skill_server_list_parameters_ss: ss-> "moveit_skill_server_node::~/list_parameters"
+        - moveit_skill_server_set_patameters_ss: ss-> "moveit_skill_server_node::~/set_parameters"
+        - moveit_skill_server_set_parameters_atomically_ss: ss-> "moveit_skill_server_node::~/set_parameters_atomically"
+        
+        - moveit_skill_server_follow_joint_trajectory_ac: ac-> "moveit_skill_server_node::joint_trajectory_controller/follow_joint_trajectory"
+        
+        - moveit_skill_server_compute_path_to_point_as: as-> "moveit_skill_server_node::compute_path_to_point"
+        - moveit_skill_server_compute_path_to_pose_as: as-> "moveit_skill_server_node::compute_path_to_pose"
+        - moveit_skill_server_compute_path_to_state_as: as-> "moveit_skill_server_node::compute_path_to_state"
+        - moveit_skill_server_execute_trajectory_as: as-> "moveit_skill_server_node::execute_trajectory"
+        - moveit_skill_server_get_current_ik_frame_pose_as: as-> "moveit_skill_server_node::get_current_ik_frame_pose"
+      parameters:
+        - use_sim_time: "moveit_skill_server_node::use_sim_time"
+          value: false
+        - plan_request_params_planning_pipeline: "moveit_skill_server_node::plan_request_params.planning_pipeline"
+          value: pilz_industrial_motion_planner
+        - plan_request_params_planner_id: "moveit_skill_server_node::plan_request_params.planner_id"
+          value: PTP
+        - plan_request_params_planning_attempts: "moveit_skill_server_node::plan_request_params.planning_attempts"
+          value: 10
+        - step_size: "moveit_skill_server_node::step_size"
+          value: 0.005
+        - min_fraction: "moveit_skill_server_node::min_fraction"
+          value: 0.50
+        - max_acceleration_scaling_factor: "moveit_skill_server_node::plan_request_params.max_acceleration_scaling_factor"
+          value: 0.1
+        - planning_time: "moveit_skill_server_node::planning_time"
+          value: 1.0
+        - planning_pipelines_pipeline_names: "moveit_skill_server_node::planning_pipelines.pipeline_names"
+          value: ["ompl", "pilz_industrial_motion_planner"]
+        - planning_scene_monitor_options_name: "moveit_skill_server_node::planning_scene_monitor_options.name"
+          value: "planning_scene_monitor"
+        - planning_scene_monitor_options_robot_description: "moveit_skill_server_node::planning_scene_monitor_options.robot_description"
+          value: "robot_description"
+        - planning_scene_monitor_options_joint_state_topic: "moveit_skill_server_node::planning_scene_monitor_options.joint_state_topic"
+          value: "/joint_states"                            
+        - planning_scene_monitor_options_attached_collision_object_topic: "moveit_skill_server_node::planning_scene_monitor_options.attached_collision_object_topic"
+          value: "/moveit_cpp/planning_scene_monitor"
+        - planning_scene_monitor_options_publish_planning_scene_topic: "moveit_skill_server_node::planning_scene_monitor_options.publish_planning_scene_topic"
+          value: "/moveit_cpp/publish_planning_scene"
+        - planning_scene_monitor_options_monitored_planning_scene_topic: "moveit_skill_server_node::planning_scene_monitor_options.monitored_planning_scene_topic"
+          value: "/moveit_cpp/monitored_planning_scene"
+        - planning_scene_monitor_options_wait_for_initial_state_timeout: "moveit_skill_server_node::planning_scene_monitor_options.wait_for_initial_state_timeout"
+          value: 10.0
+        - moveit_simple_controller_manager_controller_names: "moveit_skill_server_node::moveit_simple_controller_manager.controller_names"
+          value: ["joint_trajectory_controller"]
+        - moveit_simple_controller_joint_trajectory_controller_type: "moveit_skill_server_node::moveit_simple_controller_manager.joint_trajectory_controller.type"
+          value: FollowJointTrajectory
+        - moveit_simple_controller_joint_trajectory_controller_action_ns: "moveit_skill_server_node::moveit_simple_controller_manager.joint_trajectory_controller.action_ns"
+          value: follow_joint_trajectory
+        - moveit_simple_controller_joint_trajectory_controller_default: "moveit_skill_server_node::moveit_simple_controller_manager.joint_trajectory_controller.default"
+          value: true
+        - moveit_simple_controller_joint_trajectory_controller_joints: "moveit_skill_server_node::moveit_simple_controller_manager.joint_trajectory_controller.joints"
+          value: ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]    
+        - wait_server_timeout_seconds: "moveit_skill_server_node::wait_server_timeout"
+          value: 10
+                  	                                                      
+    ur_io_control_gripper_skill_server: # This is a managed node
+      from: "io_control_gripper_skill.ur_io_control_gripper_action_server"
+     
+    lifecycle_manager: # responsible to start all the managed nodes above
+      from: "nav2_lifecycle_manager.lifecycle_manager"
+      interfaces:
+        - get_state_aruco_marker_action_server_client: sc-> "lifecycle_manager::detect_aruco_marker_action_server/get_state"
+        - change_state_arcuro_marker_action_server_client: sc-> "lifecycle_manager::detect_aruco_marker_action_server/change_state"
+        - get_state_bt_operator_client: sc-> "lifecycle_manager::bt_operator/get_state"
+        - change_state_bt_operator_client: sc-> "lifecycle_manager::bt_operator/change_state"
+      parameters:
+        - autostart: "lifecycle_manager::autostart" # Whether to transition nodes to active state on startup.
+          value: true
+        - node_names: "lifecycle_manager::node_names" # Ordered list of node names to bringup through lifecycle transition.
+          value: ['moveit_config_server', 'detect_acuco_marker_action_server', 'bt_operator', 'ur_io_control_gripper_skill_server', 'moveit_skill_server']
+        - bond_timeout: "lifecycle_manager::bond_timeout" # Heartbeat timeout. Timeout to transition down all lifecycle nodes of this manager if a server is non-responsive, in seconds. Set to 0 to deactivate. Recommended to be always larger than 0.3s for all-local node discovery. Note: if a server cleanly exits the manager will immediately be notified.
+          value: 100.0
+    #call_start_bt_operator:
+    #    from: "man2_bt_operator.call_start_app"
+    #    interfaces:
+    #      - call_start_application: ac-> "call_start_app::start_application"
+  connections:
+    ############## Aruco and Realsense ################
+    - ["/camera/realsense_camera_driver/color/camera_info", camera_info_sub]
+    - ["/camera/realsense_camera_driver/color/image_raw", camera_image_sub]
+    ############## Livecycle Manager states #####################
+    - [aruco_marker_action_server_get_state_ss, get_state_aruco_marker_action_server_client]
+    - [aruco_marker_action_server_change_state_ss, change_state_arcuro_marker_action_server_client]
+    - [bt_get_state_ss, get_state_bt_operator_client]
+    - [bt_change_state_ss, change_state_bt_operator_client]
+    #- [start_application, call_start_application]
+    

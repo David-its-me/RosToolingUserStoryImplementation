@@ -7,7 +7,7 @@ from launch.substitutions import LaunchConfiguration, PythonExpression, PathJoin
 
 def generate_launch_description():
     ld = LaunchDescription()
-    
+
 
     YourScript = Node(
         package="moveit2_scripts",

@@ -69,7 +69,7 @@ moveit_skills: # This must be the exact package name
           value: "moveit_simple_controller_manager/MoveItSimpleControllerManager"
         "moveit_simple_controller_manager.controller_names":
           type: Array[String]
-          value: ["joint_trajectory_controller"]
+          value: ["joint_trajectory_controller", "arm_controller"]
         "moveit_simple_controller_manager.joint_trajectory_controller.type":
           type: String
           value: FollowJointTrajectory
@@ -82,6 +82,18 @@ moveit_skills: # This must be the exact package name
         "moveit_simple_controller_manager.joint_trajectory_controller.joints":
           type: Array[String]
           value: ["shoulder_pan_joint", "shoulder_lift_joint", "elbow_joint", "wrist_1_joint", "wrist_2_joint", "wrist_3_joint"]
+        "moveit_simple_controller_manager.arm_controller.type":
+          type: String
+          value: FollowJointTrajectory
+        "moveit_simple_controller_manager.arm_controller.action_ns":
+          type: String
+          value: follow_joint_trajectory
+        "moveit_simple_controller_manager.arm_controller.default":
+          type: Boolean
+          value: True
+        "moveit_simple_controller_manager.arm_controller.joints":
+          type: Array[String]
+          value: ["prbt_joint_1", "prbt_joint_2", "prbt_joint_3", "prbt_joint_4", "prbt_joint_5", "prbt_joint_6"]
         "planning_scene_monitor_options.name":
           type: String
           value: "planning_scene_monitor"

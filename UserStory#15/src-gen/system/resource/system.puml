@@ -1,0 +1,15 @@
+@startuml
+
+/'SUBSYSTEMS'/
+component ur5e_cell_moveit_config {
+ }
+
+  component YourScript {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+
+@enduml

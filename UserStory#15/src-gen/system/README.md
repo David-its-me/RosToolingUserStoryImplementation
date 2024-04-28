@@ -31,7 +31,7 @@ source install/setup.bash
 To execute the launch file, the following command can be called:
 
 ```
-ros2 launch system system.launch.py
+ros2 launch system system.launch.py 
 ```
 
 The generated launch files requires the xterm package, it can be installed by:

@@ -1,0 +1,8 @@
+marker_publisher:
+  ros__parameters:
+    camera_frame: camera_color_optical_frame
+    reference_frame: tool0
+    marker_size_arg: 0.05
+    raw_image_topic: camera/color/image_raw
+    camera_info_topic: camera/color/camera_info
+

@@ -1,0 +1,5 @@
+moveit_config_server:
+  ros__parameters:
+    robot_name: ur5e_workcell
+    moveit_config: ur5e_cell_moveit_config
+

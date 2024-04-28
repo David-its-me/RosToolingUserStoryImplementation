@@ -1,0 +1,9 @@
+detect_acuco_marker_action_server:
+  ros__parameters:
+    bond_disable_heartbeat_timeout: true
+    required_pose_num: 2
+    sub_marker_topic: /marker
+    sub_rate: 10
+    timeout: 5000
+    use_sim_time: false
+

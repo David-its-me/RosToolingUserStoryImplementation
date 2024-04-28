@@ -1,0 +1,8 @@
+bt_operator:
+  ros__parameters:
+    current_bt_xml_filename: Masterarbeit_Cloud/ma-lieb-robotics-integration/04_Umsetzung/Implementation/Behaviour Tree/SimpleMovement.xml -p run_loop:=false
+    current_bt_xml_name: MoveToQR
+    man2_bt_skill_clients: [compute_path_to_state_client, compute_path_to_pose_client, compute_path_to_point_client, execute_trajectory_client, set_path_constraints, get_current_ik_frame_pose_client, update_pose, split_pose, create_pose, update_orientation_in_pose, detect_aruco_marker_client, print_value, print_ros_msg]
+    ur_robot_skill_clients: [io_control_gripper, get_ur_robot_state, get_ur_safety_state, get_ur_program_state, check_safety_mode, check_robot_mode, is_robot_running, is_safety_normal, is_program_running]
+    default_plugin_lib_names: [util_plugin_print_value, rest_action_observer]
+

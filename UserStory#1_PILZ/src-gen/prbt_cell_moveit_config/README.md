@@ -25,7 +25,7 @@ sudo apt install ros-ROSDISTRO-prbt-cell-bringup
 To launch this system there is already an existing package that contains the launch file. It can be started by:
 
 ```
-ros2 launch prbt_cell_bringup bringup.launch.py
+ros2 launch prbt_cell_bringup bringup.launch.py 
 ```
 
 

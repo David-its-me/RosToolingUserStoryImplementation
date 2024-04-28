@@ -1,0 +1,78 @@
+@startuml
+
+/'SUBSYSTEMS'/
+component prbt_cell_moveit_config {
+ }
+
+  component marker_publisher {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+    portin marker_publisher.camera_info_sub as "camera_info_sub" #blue
+    portin marker_publisher.camera_image_sub as "camera_image_sub" #blue
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+  component realsense_tf_node {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+  component realsense_camera_driver {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+    portout realsense_camera_driver._camera_realsense_camera_driver_color_camera_info as "/camera/realsense_camera_driver/color/camera_info" #blue
+    portout realsense_camera_driver._camera_realsense_camera_driver_color_image_raw as "/camera/realsense_camera_driver/color/image_raw" #blue
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+  component moveit_config_server {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+  component bt_operator {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+    portin bt_operator.start_application as "start_application" #green
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+  component detect_acuco_marker_action_server {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+  component moveit_skill_server {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+  component gripper_command_action_server {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+  component lifecycle_manager {
+
+/' PORTS DEFINED AS AVAILABLE IN THE ROSSYSTEM FILE '/
+
+/' PORTS FROM THE ORIGINAL NODE '/
+  }
+
+  realsense_camera_driver._camera_realsense_camera_driver_color_camera_info --> marker_publisher.camera_info_sub
+  realsense_camera_driver._camera_realsense_camera_driver_color_image_raw --> marker_publisher.camera_image_sub
+
+@enduml

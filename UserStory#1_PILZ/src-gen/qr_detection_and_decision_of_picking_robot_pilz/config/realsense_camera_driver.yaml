@@ -1,0 +1,8 @@
+realsense_camera_driver:
+  ros__parameters:
+    camera_name: camera
+    device_type: d435
+    publish_tf: false
+    frame_id: tool0
+    child_frame_link: camera_link
+

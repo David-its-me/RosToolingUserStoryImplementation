@@ -1,0 +1,48 @@
+lifecycle_manager:
+  artifacts:
+    lifecycle_manager: # change to exector name
+      node: lifecycle_manager
+      subscribers:
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+      publishers:
+        "diagnostics":
+          type: "diagnostic_msgs/msg/DiagnosticArray"
+        "parameter_events":
+          type: "rcl_interfaces/msg/ParameterEvent"
+        "rosout":
+          type: "rcl_interfaces/msg/Log"
+      serviceclients:
+        "bt_operator/change_state":
+          type: "lifecycle_msgs/srv/ChangeState"
+        "bt_operator/get_state":
+          type: "lifecycle_msgs/srv/GetState"
+        "detect_aruco_marker_action_server/change_state":
+          type: "lifecycle_msgs/srv/ChangeState"
+        "detect_aruco_marker_action_server/get_state":
+          type: "lifecycle_msgs/srv/GetState"
+        "gripper_command_action_server/change_state":
+          type: "lifecycle_msgs/srv/ChangeState"
+        "gripper_command_action_server/get_state":
+          type: "lifecycle_msgs/srv/GetState"
+        "moveit_skill_server/change_state":
+          type: "lifecycle_msgs/srv/ChangeState"
+        "moveit_skill_server/get_state":
+          type: "lifecycle_msgs/srv/GetState"
+      serviceservers:
+        "~/describe_parameters":
+          type: "rcl_interfaces/srv/DescribeParameters"
+        "~/get_parameter_types":
+          type: "rcl_interfaces/srv/GetParameterTypes"
+        "~/get_parameters":
+          type: "rcl_interfaces/srv/GetParameters"
+        "~/is_active":
+          type: "std_srvs/srv/Trigger"
+        "~/list_parameters":
+          type: "rcl_interfaces/srv/ListParameters"
+        "~/manage_nodes":
+          type: "nav2_msgs/srv/ManageLifecycleNodes"
+        "~/set_parameters":
+          type: "rcl_interfaces/srv/SetParameters"
+        "~/set_parameters_atomically":
+          type: "rcl_interfaces/srv/SetParametersAtomically"

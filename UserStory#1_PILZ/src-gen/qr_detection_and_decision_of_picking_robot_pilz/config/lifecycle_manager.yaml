@@ -1,0 +1,6 @@
+lifecycle_manager:
+  ros__parameters:
+    autostart: true
+    node_names: [moveit_config_server, detect_acuco_marker_action_server, bt_operator, ur_io_control_gripper_skill_server, moveit_skill_server]
+    bond_timeout: 100.0
+

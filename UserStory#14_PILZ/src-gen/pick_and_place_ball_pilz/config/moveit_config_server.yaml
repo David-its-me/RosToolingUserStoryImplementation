@@ -1,0 +1,5 @@
+moveit_config_server:
+  ros__parameters:
+    robot_name: prbt_cell
+    moveit_config: prbt_cell_moveit_config
+

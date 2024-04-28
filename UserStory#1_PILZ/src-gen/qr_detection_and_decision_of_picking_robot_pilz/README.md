@@ -11,7 +11,7 @@ It holds the launch file to run the following nodes:
 - bt_operator
 - detect_acuco_marker_action_server
 - moveit_skill_server
-- ur_io_control_gripper_skill_server
+- gripper_command_action_server
 - lifecycle_manager
 
 The listed nodes offer the following connections:
@@ -45,7 +45,7 @@ source install/setup.bash
 To execute the launch file, the following command can be called:
 
 ```
-ros2 launch qr_detection_and_decision_of_picking_robot_PILZ qr_detection_and_decision_of_picking_robot_PILZ.launch.py
+ros2 launch qr_detection_and_decision_of_picking_robot_PILZ qr_detection_and_decision_of_picking_robot_PILZ.launch.py 
 ```
 
 The generated launch files requires the xterm package, it can be installed by:
